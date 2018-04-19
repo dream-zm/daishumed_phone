@@ -88,7 +88,7 @@
                             <p v-if="data.d_course_price != null">¥{{data.d_course_price}}</p>
                             <p v-if="data.d_course_price != null" class="original_price"><del>¥{{data.course_price}}</del></p>
                             <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
-                            <img class="listofcourses_bottom_img" src="../../img/homepage/gouwuche_03.png" alt="" v-on:click.stop="to_buy(data.course_type,data,data.course_thumb)">
+                            <img class="listofcourses_bottom_img" style="margin-top: .3rem;" src="../../img/homepage/gouwuche_03.png" alt="" v-on:click.stop="to_buy(data.course_type,data,data.course_thumb)">
                         </div>
 
                         <div class="listofcourses_bottom" v-if="current_tab!=2&&data.is_free==1">
@@ -99,8 +99,8 @@
                         <div class="listofcourses_bottom" v-if="current_tab==2">
                             <p>试听：5分钟</p>
                             <span class="listofcourses_bottom__span">立即试听</span>
-                            <img class="listofcourses_bottom_img" src="../../img/homepage/gouwuche_03.png" alt=""
-                                v-on:click.stop="to_buy(data.course_type,data,data.course_thumb)">
+                            <!-- <img class="listofcourses_bottom_img" src="../../img/homepage/gouwuche_03.png" alt=""
+                                v-on:click.stop="to_buy(data.course_type,data,data.course_thumb)"> -->
                         </div>
 
                     </div>
