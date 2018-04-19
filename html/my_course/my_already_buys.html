@@ -51,7 +51,7 @@
                 	</p>
        
             	</div>
-	            <div class="pharmacist_div" v-for="data in data_list_buy">
+	            <div class="pharmacist_div" v-for="data in data_list_buy" @click="jump2detail(1,0,data.course_id,6)">
 	                <div class="pharmacist_left">
 	                    <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
 	                </div>
