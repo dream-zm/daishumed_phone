@@ -22,7 +22,7 @@ Vue.component('main_bottom_nav', {
                 title: "已购",
                 img: "../../img/homepage/bottom3_59.png",
                 img_check: "../../img/homepage/bottom3__59.png",
-                link: "../my_course/my_already_buy.html"
+                link: "../my_course/my_already_buys.html"
             }, {
                 title: "发现",
                 img: "../../img/homepage/bottom5_53.png",
@@ -67,7 +67,7 @@ Vue.component('main_bottom_navs', {
                 title: "已购",
                 img: "../img/homepage/bottom3_59.png",
                 img_check: "../img/homepage/bottom3__59.png",
-                link: "./my_course/my_already_buy.html"
+                link: "./my_course/my_already_buys.html"
             }, {
                 title: "发现",
                 img: "../img/homepage/bottom5_53.png",
