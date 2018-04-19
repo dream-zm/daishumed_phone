@@ -30,6 +30,8 @@
 <body>
 
 <div id="app_body" v-cloak>
+        <!-- 背景 -->
+        <div class="ztitle_div"></div>
     <div class="nav__top">
         <!--暂时的头部-->
         <img class="nav__top_left" src="../../img/company_info/return_03.png" alt="" @click="back">
@@ -76,97 +78,99 @@
             <div class="juli"></div>
             <div class="clear zhankai_con">
                 <p class="classify">
-                    已选类别:<span>中西医执业助理医师实践技能</span>
+                    已选类别:<span>{{select_shops}}</span>
                 </p>
-                <p class="zhankai" @click="zhankai"><img src="../../img/course/detail_zhankai_03.png">展开</p>
+                <p class="zhankai" @click="Goto_buyi(3)"><img src="../../img/course/detail_zhankai_03.png">展开</p>
             </div>
             <div class="juli"></div>
 
             <!--非套包-->
-            <div class="title_div" v-if="page_flag==1">
-                <div class="concealmentlayer_div">
+                <!-- 购物选择 -->
+                <div class="concealmentlayer_bottom">
+                    <div class="concealmentlayer_bottom_div">
+                        <div class="concealmentlayer_bottom_zixun">
+                            <img class="zixun_img" src="../../img/course/zicun_03.png">咨询
+                            <div style='display:none;'>
+                                <a href='http://www.live800.com'>客户服务</a>
+                            </div>
+                            <script language="javascript" src="https://v1.live800.com/live800/chatClient/staticButton.js?jid=4032764244&companyID=912809&configID=44180&codeType=custom"></script>
+                            <div style='display:none;'>
+                                <a href='http://en.live800.com'>live chat</a>
+                            </div>
+                        </div>
+                        <div class="concealmentlayer_bottom_left" @click="Goto_buyi(1)">
+                            加入购物车
+                        </div>
+                        <div class="concealmentlayer_bottom_right" @click="Goto_buyi(2)">
+                            立即购买
+                        </div>
+                    </div>
+                </div>
+                    <!-- 课程展示  -->
+                <div class="title_div" v-if="page_flag==1">
+                    <div class="concealmentlayer_div">
 
-                    <div class="listofcourses_two">
                         <div class="listofcourses_two">
-                            <div class="listofcourses_two_div">
-                                <p class="listofcourses_two_p">
-                                    请选择考试方向
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="curriculum_ul">
-                        <!--套包里面是多选，普通的里面是单选-->
-                        <li v-for="(data,class_index) in popupwindow_data"  @click="check_class(class_index)">
-                            <div class="concealmentlayer_xuan"
-                                 :class="{concealmentlayer_ullidiv:class_index==current_buy}"
-                                 >
-                                {{data.direction_name}}
-                                <span class="price_span" :class="{curriculum_ul_li_span:class_index==current_buy}" v-if="data.spec[0].discount_price == null">（￥{{parseInt(data.spec[0].price)}}）</span>
-                                <span v-if="data.spec[0].discount_price != null">（￥{{parseInt(data.spec[0].discount_price)}}）</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null" @click="buy_two_years(!buy_two_years_flag)">
-                        <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}"
-                             >
-                            <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
-                        </div>
-                        两年期课程保障
-                    </div>
-                    <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null">
-                        ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}
-                    </p>
-                    <p class="title_div_left_p2"  v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null">
-                        ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}
-                    </p>
-                    <div class="concealmentlayer_bottom">
-                        <div class="concealmentlayer_bottom_div" v-if="Goto_buy1 == 0">
-                            <div class="concealmentlayer_bottom_zixun">
-                                <img class="zixun_img" src="../../img/course/zicun_03.png">咨询
-                               <div style='display:none;'>
-                                    <a href='http://www.live800.com'>客户服务</a>
+                            <div class="listofcourses_two">
+                                <div class="listofcourses_two_div">
+                                    <p class="listofcourses_two_p">
+                                        请选择考试方向
+                                    </p>
+                                    <img @click="shurt" class="listofcourses_two_div_img" src="../../img/user_info/placeholder_03.png" alt="">
                                 </div>
-                                <script language="javascript" src="https://v1.live800.com/live800/chatClient/staticButton.js?jid=4032764244&companyID=912809&configID=44180&codeType=custom"></script>
-                                <div style='display:none;'>
-                                <a href='http://en.live800.com'>live chat</a></div>
-                            </div>
-                            <div class="concealmentlayer_bottom_left"
-                                 @click="Goto_buyi(1)">
-                                加入购物车
-                            </div>
-                            <div class="concealmentlayer_bottom_right"
-                                 @click="Goto_buyi(2)">
-                                立即购买
                             </div>
                         </div>
+                        <ul class="curriculum_ul">
+                            <!--套包里面是多选，普通的里面是单选-->
+                            <li v-for="(data,class_index) in popupwindow_data"  @click="check_class(class_index,data.direction_name)">
+                                <div class="concealmentlayer_xuan"
+                                    :class="{concealmentlayer_ullidiv:class_index==current_buy}"
+                                    >
+                                    {{data.direction_name}}
+                                    <span class="price_span" :class="{curriculum_ul_li_span:class_index==current_buy}" v-if="data.spec[0].discount_price == null">（￥{{parseInt(data.spec[0].price)}}）</span>
+                                    <span v-if="data.spec[0].discount_price != null">（￥{{parseInt(data.spec[0].discount_price)}}）</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null" @click="buy_two_years(!buy_two_years_flag)">
+                            <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}"
+                                >
+                                <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
+                            </div>
+                            两年期课程保障
+                        </div>
+                        <!-- <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null">
+                            ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}
+                        </p>
+                        <p class="title_div_left_p2"  v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null">
+                            ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}
+                        </p> -->
                         <!--确认按钮-->
-                        <div class="concealmentlayer_bottom_divs" :class="{concealmentlayer_bottom_div: Goto_buy1 == 1 || Goto_buy1 == 2}" v-if="Goto_buy1 == 1 || Goto_buy1 == 2">
+                        <div class="concealmentlayer_bottom_divs concealmentlayer_bottom_div" >
                             <!--购物车 确认 -->
-                            <p class="title_div_left_p2"
-                               v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0">
+                            <p class="title_div_left_ps" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0 && Goto_buy1 != 3">
                                 金额 :
                                 <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
                             </p>
-                            <p class="title_div_left_p2"
-                               v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0">
+                            <p class="title_div_left_ps" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0  && Goto_buy1 != 3">
                                 金额 :
                                 <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
                             </p>
-                            <div class="yishi_GM"  v-if="Goto_buy1 == 1"
-                                 @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                            <div class="yishi_GM" v-if="Goto_buy1 == 1" @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
                                 确认
                             </div>
                             <!-- 立即购买 确认 -->
-                            <div class="yishi_GM" v-if="Goto_buy1 == 2"
-                                 @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                            <div class="yishi_GM" v-if="Goto_buy1 == 2" @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
                                 确 认
+                            </div>
+                            <!-- 列表 -->
+                            <div class="yishi_GM yishi_GMs" v-if="Goto_buy1 == 3" @click="liebiao(Goto_buy1)">
+                                 确认
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
+                
 
             <!--套包-->
             <div class="title_div" v-if="page_flag==2">
@@ -332,7 +336,6 @@
                 <p class="curriculum_nav_p">
                     {{data.name}}
                 </p>
-                <p class="curriculum_nav_p2"></p>
             </li>
         </ul>
     </div>
@@ -427,7 +430,10 @@
             <div class="find_nav_list_lee">
                 <ul>
                     <li  v-for="(data,index) in product_info" @click="collar_dir_check(index)">
-                        <span :class="{find_nav_cur:index==current_product_dir_index, other:index!=current_product_dir_index}">{{data.pro_name.split('-')[data.pro_name.split('-').length-1]}}</span></li>
+                        <span :class="{find_nav_curs:index==current_product_dir_index, other:index!=current_product_dir_index}">
+                            {{data.pro_name.split('-')[data.pro_name.split('-').length-1]}}
+                        </span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -468,7 +474,10 @@
                                     {{dataz.name}}
                                 </p>
                                 <p class="catalog_text_p2">
-                                    <span class="catalog_text_p2_span2">{{formatSeconds(dataz.time)}}</span>
+                                    <span>{{formatSeconds(dataz.time)}}</span>
+                                    <span class="catalog_text_p2_ti">20题</span>
+                                    <span v-if="false"  class="catalog_text_p2_ting">试听</span>
+                                    <span  class="catalog_imgs"> <img src="../../img/homepage/suo_03.png" alt=""></span>
                                     <!--<img class="catalog_text_p2_img" src="../../img/course/curriculum_paly_03.png"-->
                                     <!--alt="">-->
                                 </p>
@@ -479,7 +488,9 @@
             </li>
 
         </ul>
+        
     </div>
+    <div style="width:100%;height:1.29rem"></div>
 </div>
 </body>
 <!--layui框架.js-->
@@ -497,6 +508,8 @@
     var app = new Vue({
         el: '#app_body',
         data: {
+            select_shop:"",//储存商品名称
+            select_shops:"",//展示选择的商品
             Goto_buy1:"",//医师购买
             zhankai:false,//展开
             list_num:"",//判断商品勾选数量
@@ -591,8 +604,24 @@
             course_type_name: ''
         },
         methods: {
+            liebiao(){
+                app.zhankai = !app.zhankai;
+                $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
+                $(".ztitle_div").css({"display":"none"});
+                this.select_shops = this.select_shop;
+            },
+            // 关闭
+            shurt(){
+                app.zhankai = !app.zhankai;
+                $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
+                $(".ztitle_div").css({"display":"none"});
+            },
+            //医师
             Goto_buyi(a){
                 this.Goto_buy1 = a;
+                app.zhankai = !app.zhankai;
+                $(".title_div").css({"bottom":0});
+                $(".ztitle_div").css({"display":"block"});
             },
             back(){
                 union_back();
@@ -966,9 +995,10 @@
                 //计算价格
                 this.conput_price(tempData);
 
-            }, check_class(index)
+            }, check_class(index,name)
             {
                 //选择课程(非套包)
+                this.select_shop = name;
                 this.Goto_buy1 = 0;
                 this.current_buy = index;
                 this.buy_two_years_flag = false;
@@ -1175,20 +1205,13 @@
 
     app.current_tab = 0;
 
-    //展开
-    $(".zhankai").click(function(){
-        app.zhankai = !app.zhankai;
-        if(app.zhankai){
-            $(".title_div").css({"height":$(".concealmentlayer_div").height()+"px"})
-        }else{
-            $(".title_div").css({"height":"0px"})
-        }
-
-    })
+    
+    
 
     function GouNum(){
         yaqooNetPost('Cart/index', '', function (data) {
             if (data['code'] == 1000) {
+                $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
                 for(i in data['data']){
                     if(data['data'][i].product_type != 2){
                         app.shopcar_num += 1
