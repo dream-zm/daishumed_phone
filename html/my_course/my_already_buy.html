@@ -74,7 +74,7 @@
 	                       最近观看：<span>{{data.learn_video.video_name}} </span>
 	                    </p>
 	                    <p class="pharmacist_right_p1">
-	                        已学：<span class="already" style="margin-right:.1rem">{{data.learn_time}}分钟</span>
+	                        已学：<span class="already" style="margin-right:.1rem">{{data.learn_time>=3600 ? formatHour(data.learn_time)+'小时' : formatMinute(data.learn_time) + '分钟'}}</span>
 	                        </span>
 	                        <span>
 	                            有效期：{{data.down_time}}
@@ -154,10 +154,13 @@
             back(){
                 union_back();
             }, formatHour(s){
+                var n = 3601
+                return (n / 3600).toFixed(1);
 
-                return (s / 3600).toFixed(1);
+            }, formatMinute (s) {
 
-            }, init(flag)
+                return (s / 60).toFixed(1);
+            },init(flag)
             {
                 
                 yaqooNetPost('Course/purchase', {}, function (data) {
