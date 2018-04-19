@@ -18,17 +18,31 @@
     <!--公共引用-->
     <script src="../../js/jquery-2.1.4.js"></script>
     <script src="../../js/index_top.js"></script>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
     <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
     <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../css/index.css">
+
     <link rel="stylesheet" href="../../css/course/course_index.css">
     <link rel="stylesheet" href="../../css/course/listofcourses_two.css">
+    <link rel="stylesheet"  href="../../css/homepage/homepage.css">
     <link rel="stylesheet" href="../../css/homepage/dredge.css">
+
 </head>
 <body>
 <div id="app_body"  v-cloak>
     <!--原页面-->
-    <mine_top_nav init_tabs="3"></mine_top_nav>
+    <!-- <mine_top_nav init_tabs="3"></mine_top_nav> -->
+     <nav class="homepage_nav">
+        <img class="logo" src="../../img/homepage/logo_03.png">
+            我的收藏课
+        <div class="homepage_nav_right" @click="jump2shopCar">
+            <img src="../../img/course/ShoppingCart_03.png" alt="">
+            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+        </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
     <div v-if="isRegiste">
         <div class="listofcourses_nav">
             <ul class="listofcourses_nav_ul">
@@ -71,8 +85,9 @@
                             <p v-if="data.d_course_price != null" class="original_price"><del>¥{{data.course_price}}</del></p>
                             <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
                             <div style="float: right;">
-                                <span class="listofcourses_bottom_span listofcourses_bottom_span2" @click.stop="delete_free(data.course_type,data.course_id,data)">取消收藏</span>
-                                <img class="listofcourses_bottom_img" v-on:click.stop="to_buy(data.course_type,data.course_thumb)" src="../../img/course/gouwuche_13.png" alt="">
+                                <!-- <span class="listofcourses_bottom_span listofcourses_bottom_span2" @click.stop="delete_free(data.course_type,data.course_id,data)">取消收藏</span> -->
+                                <img src="../../img/course/delete_03.png" class="listofcourses_bottom_img listofcourses_bottom_img_top" @click.stop="delete_free(data.course_type,data.course_id,data)">
+                                <img class="listofcourses_bottom_img" v-on:click.stop="to_buy(data.course_type,data.course_thumb)" src="../../img/homepage/gouwuche_03.png" alt="">
                             </div>
                         </div>
 
@@ -225,11 +240,13 @@
                 </h4>
                 <div class="concealmentlayer_title">
                     <h4 class="concealmentlayer_title_h4">
-                        {{popupwindow_data[current_buy].course_type_name}}
+                        <!-- {{popupwindow_data[current_buy].course_type_name}} -->
                     </h4>
-                    <p class="concealmentlayer_title_p">
+
+                    <p class="concealmentlayer_title_h4">
+                         {{popupwindow_data[current_buy].course_type_name}}
                         <span class="concealmentlayer_title_span">有效期： {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>
-                        <span> 上线时间：{{popupwindow_data[current_buy].class_time}} </span>
+                        <!-- <span> 上线时间：{{popupwindow_data[current_buy].class_time}} </span> -->
                     </p>
                 </div>
                 <div class="listofcourses_two">
@@ -246,13 +263,14 @@
                     <li v-for="(data,class_index) in popupwindow_data" :class="{lis:data.course_id==179}">
                         <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:class_index==current_buy}"
                              @click="check_class(class_index)">
-                            <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
-                        </div>
-                        {{data.direction_name}}
-                        <span v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
-                        <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
+                           <!--  <img src="../../img/course/concealmentlayer_xuan_03.png" alt=""> -->
+                           {{data.direction_name}}
+                        <span v-if="data.spec[0].discount_price == null" :class="{concealmentlayer_ullidiv_span:class_index==current_buy}">（￥{{data.spec[0].price}}）</span>
+                        <span v-if="data.spec[0].discount_price != null" :class="{concealmentlayer_ullidiv_span:class_index==current_buy}">（￥{{data.spec[0].discount_price}}）
                             <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
                         </span>
+                        </div>
+                        
                     </li>
                 </ul>
                 <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null">
@@ -262,25 +280,52 @@
                     </div>
                     两年期课程保障
                 </div>
-                <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null">
+                <!-- <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null">
                     ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}
                 </p>
                 <p class="title_div_left_p2"  v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null">
                     ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}
-                </p>
+                </p> -->
                 <div class="concealmentlayer_bottom">
-                    <div class="concealmentlayer_bottom_div">
-
+                    <div class="concealmentlayer_bottom_div" v-if="Goto_buy1 == 0">
+                        <!-- @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)" -->
+                        <!-- @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)" -->
                         <div class="concealmentlayer_bottom_left"
-                             @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                             @click="Goto_buyi(1)" v-if="" >
                             加入购物车
                         </div>
                         <div class="concealmentlayer_bottom_right"
-                             @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                            @click="Goto_buyi(2)">
                             立即购买
                         </div>
                     </div>
+
+                        <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy1 == 1 || Goto_buy1 == 2}" v-if="Goto_buy1 == 1 || Goto_buy1 == 2">
+                        <!--购物车 确认 -->
+                        <p class="title_div_left_p2"
+                           v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0">
+                            金额 :
+                           <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
+                        </p>
+                        <p class="title_div_left_p2"
+                           v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0">
+                            金额 :
+                           <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
+                        </p>
+                        <div class="yishi_GM"  v-if="Goto_buy1 == 1"
+                         @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                            确认
+                        </div>
+                        <!-- 立即购买 确认 -->
+                        <div class="yishi_GM" v-if="Goto_buy1 == 2"
+                             @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                            确 认
+                        </div>
+                    </div>
+
+
                 </div>
+                <div style="width: 100%;height: 1.43rem;"></div>
             </div>
         </div>
 
@@ -298,7 +343,7 @@
                     </h4>
                     <p class="concealmentlayer_title_p">
                         <span class="concealmentlayer_title_span">有效期： {{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
-                        <span> 上线时间：{{popupwindow_data_collar[current_type].class_time}} </span>
+                       <!--  <span> 上线时间：{{popupwindow_data_collar[current_type].class_time}} </span> -->
                     </p>
                 </div>
 
@@ -375,7 +420,7 @@
         </div>
     </div>
     <!--底部导航-->
-    <main_bottom_nav init_tabs="2"></main_bottom_nav>
+    <!-- <main_bottom_nav init_tabs="2"></main_bottom_nav> -->
 </div>
 
 
@@ -387,7 +432,9 @@
 <!--插入页面元素统一JS-->
 <script src="../../js/index_footer.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
-<script type="text/babel">
+<script>
+
+
 
     var app = new Vue({
         el: '#app_body',
@@ -489,11 +536,15 @@
                     position: "",
                     teacher_photo: ""
                 }
-            ]
+            ],
+             Goto_buy1: ''
         },
         methods: {
 
             // 取消收藏 couser_type  couser_id
+            Goto_buyi (buy) {
+                this.Goto_buy1 = buy;
+            },
             delete_free(a,b){
 
                 if(b == undefined){
@@ -542,6 +593,7 @@
             }, check_class(index)
             {
                 //选择课程(非套包)
+                this.Goto_buy1 = 0
                 this.current_buy = index;
                 this.buy_two_years_flag = false;
             }, check_class_collar(index)
@@ -751,7 +803,7 @@
 
 
                     // 判断购买了多少个 是否是全部购买
-                    for (index in datas.course_list) {
+                    for (var index in datas.course_list) {
                         var dataz = datas.course_list[index];
                         if (dataz.checks == 'True') {
                             course_list_buy_flags++;
@@ -825,7 +877,7 @@
                     } else
                     {//非全部购买
                         var course_list_num=0
-                        for (index in datas.course_list) {
+                        for (var index in datas.course_list) {
                             var dataz = datas.course_list[index];// 获取到 每个被 选中的套包
 
                             if (dataz.checks == 'True') {
@@ -914,7 +966,7 @@
 
             }, close()
             {
-
+                this.Goto_buy1 = 0;
                 this.showbuy = false;
 
             }, init(flag)
@@ -945,11 +997,15 @@
 
 
     app.init(app.page_flag);
+    GouNum();
     //购物车数量
-    function GouNum(){
+    
+}
+
+function GouNum(){
         yaqooNetPost('Cart/index', '', function (data) {
             if (data['code'] == 1000) {
-                for(i in data['data']){
+                for(var i in data['data']){
                     if(data['data'][i].product_type != 2){
                         app.shopcar_num += 1
                     }
@@ -957,9 +1013,5 @@
             }
         })
     }
-    if (check_user_state()) {
-        GouNum();
-    }
-}
 </script>
 </html>

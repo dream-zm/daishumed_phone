@@ -11,10 +11,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>我的已购课程</title>
-
-    <!--无考试方向 执业医师、执业药师 -->
-
-
     <!--flexible布局  -->
     <script src="../../js/flexible.js"></script>
 
@@ -24,110 +20,113 @@
     <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
     <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/course/course_index.css">
     <link rel="stylesheet" href="../../css/course/listofcourses.css">
     <link rel="stylesheet" href="../../css/homepage/dredge.css">
+    <link rel="stylesheet" href="../../css/course/my_already_buy.css">
 </head>
 <body>
 <div id="app_body"  v-cloak>
-
-
-
-
-    <mine_top_nav init_tabs="0"></mine_top_nav>
-
+	<nav class="homepage_nav">
+	    <img class="logo" src="../../img/homepage/logo_03.png">
+	    	我的购买
+	    <div class="homepage_nav_right" @click="jump2shopCar">
+	        <img src="../../img/course/ShoppingCart_03.png" alt="">
+	        <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+	    </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
     <div v-if="isRegiste">
-        <div class="listofcourses_nav">
-            <ul class="listofcourses_nav_ul">
-                <li :class="{'listofcourses_nav_ul_li':current_tab==index}" v-on:click="tab_check(index)"
-                    v-for="(data,index) in tab_list">
-                    <p>
-                        {{data.name}}
+        <div class="homepage_guanyu">
+            <!-- <div style="width: 100%;height: .3rem;background: #eceef0;"></div>     -->
+
+
+        <div class="pharmacist" style="padding-bottom: 0">
+	        <div class="admission_div">
+            	<div class="admission_div_top">
+                	<p class="admission_div_top_p admission_div_top_p2" style="border-left-color: #0299ec">
+                    	已购课程
+                	</p>
+       
+            	</div>
+	            <div class="pharmacist_div" v-for="data in data_list_buy" @click="jump2detail(1,0,data.course_id,6)">
+	                <div class="pharmacist_left">
+	                    <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
+	                </div>
+	                <div class="pharmacist_right">
+	                    <h4 class="pharmacist_right_h4">
+	                       {{data.course_type_name}}
+	                       </h4>
+	                    <p class="pharmacist_right_p">
+	                       已选科目：<span>{{data.direction_name}}</span>
+	                    </p>
+	                    <p class="pharmacist_right_p1">
+	                        <span style="color: #999999;margin-right:.5rem">
+	                           总时长：{{formatHour(data.time_num)}}小时
+	                        </span>
+	                        <span>
+	                            已更新：{{data.already_new}}节
+	                        </span>
+	                    </p>
+	                    <p class="pharmacist_right_p">
+	                       最近观看：<span>{{data.learn_video.video_name}} </span>
+	                    </p>
+	                    <p class="pharmacist_right_p1">
+	                        已学：<span class="already" style="margin-right:.1rem">{{data.learn_time>=3600 ? formatHour(data.learn_time)+'小时' : formatMinute(data.learn_time) + '分钟'}}</span>
+	                        </span>
+	                        <span>
+	                            有效期：{{data.down_time}}
+	                        </span>
+	                    </p>
+	                </div>
+	            </div>
+	        </div>
+	   	</div>
+        
+
+        <div class="homepage_guanyu">
+            <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
+            <div  class="admission_div">
+                <div class="admission_div_top homepage_guanyu_top">
+                    <p class="admission_div_top_p" style="border-left-color: #37af12">
+                        联系我们
                     </p>
-                    <span>
-                    </span>
-                </li>
-            </ul>
-        </div>
-        <div v-if="IsDredge">
-        <!--精品课程-->
-        <ul class="listofcourses_ul">
-            <li v-for="data in data_list_buy" @click="jump2detail(page_flag,0,data.course_id,6)">
-                <div class="listofcourses_div">
-                    <img class="listofcourses_img" :src="data.course_thumb" alt="">
-                    <div class="listofcourses_right">
-                        <h4 class="listofcourses_right_h4">
-                            {{data.course_type_name}}{{data.course_name}}
-                            <!-- 拼接课时及习题数量 -->
-                            <!-- {{(data.time_num!=0||data.question_num!=0)?'(已更新':''}}
-                            {{data.time_num!=0?formatHour(data.time_num)+'小时课':''}}
-                            {{data.question_num!=0?data.question_num+'道习题':''}}
-                            {{(data.time_num!=0||data.question_num!=0)?')':''}} -->
-                        </h4>
-                        <div class="listofcourses_divdiv" v-if="data.teacher_name">
-                            <p class="listofcourses_div_p">
-                                {{data.teacher_name}}---{{data.teacher_unit}}
+                </div>
+                <div class="homepage_lianxi">
+                    <div class="homepage_lianxiT homepage_lianxiTl">
+                   
+                        <img src="../../img/homepage/erweima1_07.png" alt="">
+                            <p class="homepage_lianxiT_txt">
+                                袋鼠医学微信公众号
                             </p>
-                        </div>
-                        <div class="listofcourses_divdiv" v-if="data.direction_name">
-                            <p class="listofcourses_div_p">
-                                <span> 已选：</span>{{data.direction_name}}
-                            </p>
-                        </div>
-
-                        <div class="listofcourses_bottom" >
-                            <!-- <p>共有{{data.sale_num}}人在学习</p> -->
-                            <p>已含赠品</p>
-                            <span class="listofcourses_bottom_span">立即学习</span>
-                        </div>
 
                     </div>
-                </div>
-            </li>
-
-           <!--  <li v-for="data in data_list_buy" @click="jump2detail(page_flag,0,data.course_id,6)">
-                <div class="listofcourses_div">
-                    <img class="listofcourses_img" :src="data.course_thumb" alt="">
-                    <div class="listofcourses_right">
-                        <h4 class="listofcourses_right_h4">
-                            {{data.course_name}}
-                        </h4>
-                        <div class="listofcourses_divdiv" v-if="data.teacher_name">
-                            <p class="listofcourses_div_p">
-                                {{data.teacher_name}}---{{data.teacher_unit}}
+                    <div class="homepage_lianxiT homepage_lianxiTr">
+                            <img  src="../../img/homepage/erweima1_07.png" alt="">
+                            <p class="homepage_lianxiT_txt" style="text-align: center">
+                                加卡丁老师（kading33）
+                                拉入官方微信交流群
                             </p>
 
+                    </div>
+                    <div  class="homepage_lianxiB">
+                        <div class="homepage_lianxiBl">
+                            <img style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../../img/homepage/dianhua_10.png" alt="">
+                            电话: 010-64405382
                         </div>
-                        <div class="listofcourses_divdiv">
-                            <p class="listofcourses_div_p">
-                                <span> 时长：</span>{{formatHour(data.time_num)}}小时/{{data.subject_num}}节课
-                            </p>
-                            <p class="listofcourses_div_p2">
-                                {{data.sale_num}}人购买
-                            </p>
-                        </div>
-                        <div class="listofcourses_bottom">
-                            <p>已购买</p>
-                            <span class="listofcourses_bottom_span">立即学习</span>
+                        <div class="homepage_lianxiBl">
+                            <img  style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../../img/homepage/qq_07.png" alt="">
+                            QQ群: 590385908
                         </div>
                     </div>
                 </div>
-            </li>
- -->
-
-        </ul>
+            </div>
         </div>
+        <div style="width: 100%;height: .24rem;background: #eceef0;margin-bottom: 1.29rem;"></div>
     </div>
-
     <is-register></is-register>
-    <div style="height:.2rem;background:#f0f0f0;width:100%" v-show="current_tab==2"></div>
-    <div style="height: 8rem;position: relative;" v-if="!IsDredge">
-        <div style="position:absolute;left:46%;top:50%;margin-top:-2.1rem;margin-left:-3rem;width: 6rem;height: 4.2rem;display: inline-block;text-align: center;">
-            <img src="../../img/course/tip.png" style="width: 4.49rem;height: 3.47rem;margin-bottom: .52rem;">
-            <p style="margin-left:.5rem;color: #a3c5e0;font-size: .48rem;">内容暂未上线</p>
-            <p style="margin-left:.3rem;font-size: .34rem;color: #a3c5e0;text-align: center;margin-top: .1rem">如有疑问请拨打 400-9001-765 咨询</p>
-        </div>
-    </div>
     <!--底部导航-->
     <main_bottom_nav init_tabs="2"></main_bottom_nav>
 </div>
@@ -138,101 +137,62 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!--插入页面元素统一JS-->
 <script src="../../js/index_footer.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
-<script type="text/babel">
-
-
-
+<script>
     var app = new Vue({
         el: '#app_body',
         data: {
             IsDredge:true,
             isRegiste:check_user_state(),//判断是否去登录
             page_flag: 1,//1执业医师 2执业药师 3为国医经典 4为卫生管理
-            data_list_buy: [],//已购买的数组
-            shopcar_num: 0,//购物车数量
-            data_list: [{
-
-                "course_price": "",
-                "course_thumb": "",
-                "course_type": "",
-                "course_type_describe": "",
-                "course_type_name": "",
-                "direction_name": "",
-                "price_sum": "",
-                "question_num": "",
-                "time_num": "",
-
-
-            }], tab_list: [
-                {name: "执业医师", index: 0},
-                {name: "执业药师", index: 1},
-                {name: "中医师承", index: 2},
-                // {name: "卫生管理", index: 3},
-
-            ], current_tab: 0,
-
+            data_list_buy: [{
+            	learn_video: {}
+            }],//已购买的数组
+            shopcar_num: 0//购物车数量
         },
         methods: {
 
             back(){
                 union_back();
-            }, tab_check(index)
-            {
-
-                this.current_tab = index;
-                switch (index) {
-                    case 0:
-                        this.init(1);
-                        this.IsDredge = true
-                        break;
-                    case 1:
-                        this.init(2);
-                        this.IsDredge = true
-                        break;
-                    case 2:
-                        // this.init(3);
-                        this.IsDredge=false
-                        break;
-                    case 3:
-                        this.init(4);
-                        break;
-                }
-                console.log(this.current_tab)
             }, formatHour(s){
-
                 return (s / 3600).toFixed(1);
 
-            }, init(flag)
+            }, formatMinute (s) {
+
+                return (s / 60).toFixed(1);
+            },init(flag)
             {
-                app.data_list_buy = []
-                yaqooNetPost('Course/purchase', {list_type: flag}, function (data) {
-
+                
+                yaqooNetPost('Course/purchase', {}, function (data) {
                     if (data['code'] == 1000) {
-
-                        app.data_list_buy = data['data'];
-                        console.log(app.data_list_buy)
+                        app.data_list_buy = data['data'];             
                     }
                 },false)
             }
         }
     });
 
-    app.page_flag = localStorage.getItem("page_jump_info");
-
-
     if(check_user_state()){
         if(getTempData() == '' || getTempData() ==null || JSON.parse(getTempData()) instanceof Array){
-            app.init(1);
+            app.init();
         } else {
             app.current_tab = getTempData()-1;
             app.init(Number(getTempData()))
         }
     };
 
-
-
-
-
+    function GouNum(){
+        yaqooNetPost('Cart/index', '', function (data) {
+            if (data['code'] == 1000) {
+                for(var i in data['data']){
+                    if(data['data'][i].product_type != 2){
+                        app.shopcar_num += 1
+                    }
+                }
+            }
+        })
+    }
+    if (check_user_state()) {
+        GouNum();
+    }
 </script>
 </html>

@@ -1,0 +1,61 @@
+.pharmacist_left {
+	width: 3.76rem;
+	height: 2.33rem;
+}
+
+.pharmacist_right {
+	width: 5.23rem;
+}
+
+.pharmacist_right_p {
+	margin-bottom: 0;
+}
+.pharmacist_right_p1 {
+	margin-top: 0;
+	font-size: .28rem;
+}
+
+.pharmacist_right_p1 .already {
+	color: #ff8605;
+}
+.homepage_lianxiT {
+	text-align: center;
+	width: 4.13rem;
+	height: 4.52rem;
+}
+
+.homepage_lianxiT img {
+	display: inline-block;
+	width: 2.74rem;
+	height: 2.74rem;
+	margin-top: .43rem;
+}
+
+.homepage_lianxiTr img {
+	margin-top: .44rem;
+	width: 2.75rem;
+	height: 2.75rem;
+}
+.pharmacist_right_h4 {
+	margin-bottom: .13rem;
+}
+
+.homepage_lianxiB {
+    position: absolute;
+    width: 9.33rem;
+    height: 1rem;
+    border: 1px solid #dbdbdb;
+   /* bottom: 0;*/
+    left: .14rem;
+    /*top: 0;*/
+}
+
+.homepage_lianxi {
+	height: 6rem;
+
+}
+
+.pharmacist_div {
+	border-bottom: 0;
+}
+
