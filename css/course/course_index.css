@@ -76,6 +76,7 @@ body{
 }
 .img_top,.img_bottom {
     width: 100%;
+    margin-top: -.05rem;
 }
 .img_top img {
     width: .28rem;

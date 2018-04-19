@@ -72,7 +72,7 @@
                 </div>
                 <div class="title_div_left_p_right">
                     <p class="price">￥1680</p>
-                    <p><img src="../../img/course/detail_tubiao_04.png"><span>已更新：65节</span></p>
+                    <!-- <p><img src="../../img/course/detail_tubiao_04.png"><span>已更新：65节</span></p> -->
                 </div>
             </div>
             <div class="juli"></div>
@@ -515,7 +515,11 @@
             list_num:"",//判断商品勾选数量
             current_video_url: '-',
             page_flag: 0,//1为职业医师，2为职业药师
-            course_data: '',//课程信息
+            course_data: {
+            teacher_list:[{
+            teacher_name:''
+        }]
+        },//课程信息
             product_info: '',//产品信息
             video_list: '',//试听视频
             current_listen: 0,//当前的试听
