@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
     <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/course/course_index.css">
     <link rel="stylesheet" href="../../css/course/livelist.css">
     <link rel="stylesheet" href="../../css/homepage/dredge.css">
@@ -27,7 +29,17 @@
 <div id="app_body"  v-cloak>
 
     <!--原页面-->
-    <mine_top_nav init_tabs="1"></mine_top_nav>
+  <!--   <mine_top_nav init_tabs="1"></mine_top_nav> -->
+  <!--原页面-->
+    <nav class="homepage_nav">
+        <img class="logo" src="../../img/homepage/logo_03.png">
+            我的直播课
+        <div class="homepage_nav_right" @click="jump2shopCar">
+            <img src="../../img/course/ShoppingCart_03.png" alt="">
+            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+        </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
     <div v-if="isRegiste">
         <div class="listofcourses_nav">
             <div class="listofcourses_nav_ul">
@@ -129,7 +141,7 @@
             </div>
     </div>
     <!--底部导航-->
-    <main_bottom_nav init_tabs="2"></main_bottom_nav>
+    <!-- <main_bottom_nav init_tabs="2"></main_bottom_nav> -->
 
 </div>
 </body>
@@ -172,7 +184,9 @@
             teacher_id: '',
             live_time: '',
             checked_img: '../../img/course/livelist_sanjiao2_05.png',
-            img: '../../img/course/livelist_sanjiao_03.png'
+            img: '../../img/course/livelist_sanjiao_03.png',
+            shopcar_num: 0
+
 
         },
         methods: {
@@ -335,6 +349,20 @@
         }
 
 
+        function GouNum(){
+        yaqooNetPost('Cart/index', '', function (data) {
+            if (data['code'] == 1000) {
+                for(var i in data['data']){
+                    if(data['data'][i].product_type != 2){
+                        app.shopcar_num += 1
+                    }
+                }
+                    }
+                })
+            }
+            if (check_user_state()) {
+                GouNum();
+            }
 </script>
 
 

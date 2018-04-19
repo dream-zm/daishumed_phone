@@ -133,5 +133,12 @@
 	color: #999;
 	margin-left: .48rem;
 }
-  
+ .listofcourses_bottom .listofcourses_bottom_img_top {
+ 	top: -2rem;
+    width: .86em;
+    height: .5rem;
+    right: 0.25rem;
+ }
+
+ 
     
