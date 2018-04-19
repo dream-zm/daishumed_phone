@@ -68,7 +68,7 @@
                 <!-- 上线时间：{{course_data.class_time}} -->
                 <div class="title_div_left_p_left">
                     <p class="img_top"><img src="../../img/course/detail_tubiao_03.png"><span>官方出版社  品质有保障</span></p>
-                    <p class="img_bottom"><img src="../../img/course/detail_tubiao_07.png"><span>范吉平 · 中国中医药出版社社长</span></p>
+                    <p class="img_bottom"><img src="../../img/course/detail_tubiao_07.png"><span class='title_div_span'>{{course_data.teacher_list[0].teacher_name}}</span></p>
                 </div>
                 <div class="title_div_left_p_right">
                     <p class="price">￥1680</p>
@@ -608,10 +608,10 @@
                 app.zhankai = !app.zhankai;
                 $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
                 $(".ztitle_div").css({"display":"none"});
-                this.select_shops = this.select_shop;
             },
             // 关闭
             shurt(){
+                this.select_shops ="";
                 app.zhankai = !app.zhankai;
                 $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
                 $(".ztitle_div").css({"display":"none"});
@@ -654,6 +654,7 @@
                 console.log(player)
                 player.play();
             }, buy(id, jump2shopcar,isbuy,Gobuy,spec){
+                
                 //添加购物车与立即购买（即购买后跳转购物车）
                 //1为职业医师，
                     if (!check_user_state()) {
@@ -741,6 +742,8 @@
                         }else{
                             alert("商品已购买")
                         }
+
+                        
 
                     } else if (this.page_flag == 2) {
                             //2为职业药师  ,套包
@@ -905,7 +908,7 @@
                             if (course_list_buy_flags != 0) {//说明有未购买的
                                 if(Gobuy){
                                     alert("商品已加入购物车")
-                                }
+                                 }
                                 //是立即购买而且选中了课程才可以跳转
                                 if (jump2shopcar && this.collar_price != 0) {
                                     // return;
@@ -972,10 +975,8 @@
 
                             // }
                         //是立即购买而且选中了课程才可以跳转
-
-
+                    
                     }
-
 
             }, collar_dir_check(index){
                 //选择套包内的课程目录
@@ -999,7 +1000,7 @@
             {
                 //选择课程(非套包)
                 this.select_shop = name;
-                this.Goto_buy1 = 0;
+                this.select_shops = this.select_shop;
                 this.current_buy = index;
                 this.buy_two_years_flag = false;
 
@@ -1082,7 +1083,6 @@
             }, format_dir(){
                 //初始化自定义目录
                 app.dir_list.length = 0;
-
                 //取出目录的数组数据【将对象套对象转为数组】
                 for (var i in app.product_info[app.current_product_dir_index].pro_category) {
 

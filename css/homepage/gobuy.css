@@ -166,3 +166,15 @@
     border: 1px solid #2094e6 !important;
     color: #2094e6 !important;
 }
+.title_div_span{
+    width: 84%;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: inline-block;
+    height: .4rem;
+     position: relative;
+    top: .13rem;
+}
