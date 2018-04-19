@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../../css/course/course_index.css">
     <link rel="stylesheet" href="../../css/course/curriculum_two.css">
     <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/homepage/gobuy.css">
 </head>
 <body>
 
@@ -77,7 +78,7 @@
                 <p class="classify">
                     已选类别:<span>中西医执业助理医师实践技能</span>
                 </p>
-                <p class="zhankai"><img src="../../img/course/detail_zhankai_03.png">展开</p>
+                <p class="zhankai" @click="zhankai"><img src="../../img/course/detail_zhankai_03.png">展开</p>
             </div>
             <div class="juli"></div>
 
@@ -89,27 +90,21 @@
                         <div class="listofcourses_two">
                             <div class="listofcourses_two_div">
                                 <p class="listofcourses_two_p">
-                                    {{course_type_name}} <span>有效期:{{popupwindow_data[current_buy].spec[0].down_time}}</span>
+                                    请选择考试方向
                                 </p>
                             </div>
                         </div>
                     </div>
                     <ul class="curriculum_ul">
                         <!--套包里面是多选，普通的里面是单选-->
-                        <li v-for="(data,class_index) in popupwindow_data" :class="{lis:data.course_id==179}" @click="check_class(class_index)">
-                            <div class="concealmentlayer_xuan3"
+                        <li v-for="(data,class_index) in popupwindow_data"  @click="check_class(class_index)">
+                            <div class="concealmentlayer_xuan"
                                  :class="{concealmentlayer_ullidiv:class_index==current_buy}"
                                  >
-                                <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
-                            </div>
-
                                 {{data.direction_name}}
-                            <span class="price_span" v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
-                            <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
-                                <span  class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
-                            </span>
-
-
+                                <span class="price_span" :class="{curriculum_ul_li_span:class_index==current_buy}" v-if="data.spec[0].discount_price == null">（￥{{parseInt(data.spec[0].price)}}）</span>
+                                <span v-if="data.spec[0].discount_price != null">（￥{{parseInt(data.spec[0].discount_price)}}）</span>
+                            </div>
                         </li>
                     </ul>
                     <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null" @click="buy_two_years(!buy_two_years_flag)">
@@ -126,7 +121,7 @@
                         ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}
                     </p>
                     <div class="concealmentlayer_bottom">
-                        <div class="concealmentlayer_bottom_div">
+                        <div class="concealmentlayer_bottom_div" v-if="Goto_buy1 == 0">
                             <div class="concealmentlayer_bottom_zixun">
                                 <img class="zixun_img" src="../../img/course/zicun_03.png">咨询
                                <div style='display:none;'>
@@ -137,12 +132,35 @@
                                 <a href='http://en.live800.com'>live chat</a></div>
                             </div>
                             <div class="concealmentlayer_bottom_left"
-                                 @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                                 @click="Goto_buyi(1)">
                                 加入购物车
                             </div>
                             <div class="concealmentlayer_bottom_right"
-                                 @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                                 @click="Goto_buyi(2)">
                                 立即购买
+                            </div>
+                        </div>
+                        <!--确认按钮-->
+                        <div class="concealmentlayer_bottom_divs" :class="{concealmentlayer_bottom_div: Goto_buy1 == 1 || Goto_buy1 == 2}" v-if="Goto_buy1 == 1 || Goto_buy1 == 2">
+                            <!--购物车 确认 -->
+                            <p class="title_div_left_p2"
+                               v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0">
+                                金额 :
+                                <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
+                            </p>
+                            <p class="title_div_left_p2"
+                               v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0">
+                                金额 :
+                                <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
+                            </p>
+                            <div class="yishi_GM"  v-if="Goto_buy1 == 1"
+                                 @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                                确认
+                            </div>
+                            <!-- 立即购买 确认 -->
+                            <div class="yishi_GM" v-if="Goto_buy1 == 2"
+                                 @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                                确 认
                             </div>
                         </div>
                     </div>
@@ -470,15 +488,17 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!--插入页面元素统一JS-->
 <script src="../../js/index_footer.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 <script type="text/babel">
-
 
     // checkUserState(true);
 
     var app = new Vue({
         el: '#app_body',
         data: {
+            Goto_buy1:"",//医师购买
+            zhankai:false,//展开
             list_num:"",//判断商品勾选数量
             current_video_url: '-',
             page_flag: 0,//1为职业医师，2为职业药师
@@ -571,7 +591,9 @@
             course_type_name: ''
         },
         methods: {
-
+            Goto_buyi(a){
+                this.Goto_buy1 = a;
+            },
             back(){
                 union_back();
             }, tab_check(index)
@@ -947,6 +969,7 @@
             }, check_class(index)
             {
                 //选择课程(非套包)
+                this.Goto_buy1 = 0;
                 this.current_buy = index;
                 this.buy_two_years_flag = false;
 
@@ -1094,6 +1117,7 @@
                             app.current_price = app.course_data.spec[0].price;
                         }
 
+
                         //获取产品信息
                         app.product_info = data['data'].product_info;
                         app.video_list = data['data'].video_list;
@@ -1151,11 +1175,21 @@
 
     app.current_tab = 0;
 
+    //展开
+    $(".zhankai").click(function(){
+        app.zhankai = !app.zhankai;
+        if(app.zhankai){
+            $(".title_div").css({"height":$(".concealmentlayer_div").height()+"px"})
+        }else{
+            $(".title_div").css({"height":"0px"})
+        }
+
+    })
 
     function GouNum(){
         yaqooNetPost('Cart/index', '', function (data) {
             if (data['code'] == 1000) {
-                for(var i in data['data']){
+                for(i in data['data']){
                     if(data['data'][i].product_type != 2){
                         app.shopcar_num += 1
                     }
