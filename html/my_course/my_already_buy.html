@@ -71,7 +71,8 @@
 	                        </span>
 	                    </p>
 	                    <p class="pharmacist_right_p">
-	                       最近观看：<span>{{data.learn_video.video_name}} </span>
+
+	                       最近观看：<span v-if="data.learn_video.video_name">{{data.learn_video.video_name}} </span><span v-if="!data.learn_video.video_name">无</span>
 	                    </p>
 	                    <p class="pharmacist_right_p1">
 	                        已学：<span class="already" style="margin-right:.1rem">{{data.learn_time>=3600 ? formatHour(data.learn_time)+'小时' : formatMinute(data.learn_time) + '分钟'}}</span>
