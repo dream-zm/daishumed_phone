@@ -1,0 +1,38 @@
+.div_div {
+    width: 5em;
+    height: 3em;
+    float: right;
+    z-index: 11211111;
+    line-height: 3em;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+}
+
+.div_div_yincang_ul {
+    overflow: hidden;
+}
+
+.div_div_yincang_ul li {
+    overflow: hidden;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    border-bottom: 1px solid #ccc;
+}
+#bay{
+    width: 100px;
+    color: #fff;
+    font-size: 18px;
+    z-index: 11111;
+}
+.div_div_yincang {
+    display: none;
+    width: 100%;
+    background: #000;
+    overflow: hidden;
+    position: absolute;
+    top: -199px;
+}

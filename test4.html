@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js" charset="utf-8"></script>;
+</head>
+<body>
+<div id="id_test_video" style="width:100%; height:auto;"></div>
+<script type="text/javascript">
+  var player = new TcPlayer('id_test_video', {
+  "m3u8": "https://1253453563.vod2.myqcloud.com/e23f8a6cvodtransgzp1253453563/2b26d0a44564972818892267887/v.f230.m3u8", //请替换成实际可用的播放地址
+  "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+  "coverpic" : "http://www.test.com/myimage.jpg",
+  "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+  "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+  });
+</script>
+</body>
+</html>

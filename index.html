@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>袋鼠医学网站维护</title>
+	<style type="text/css"> 
+		body{padding: 0px;margin: 0px;}
+		img{width: 100%;}
+	</style>
+</head>
+
+<body>
+	<img id="weihu" src="" />
+	
+	<script type="text/javascript">
+		function IsPC() {
+			var userAgentInfo = navigator.userAgent;
+			var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgentInfo.indexOf(Agents[v]) > 0) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+	 
+		if(IsPC() == true){
+			document.getElementById("weihu").src = "pc_weihu.jpg";
+		}else{
+			// window.location.href = "/html/index.html";
+			document.getElementById("weihu").src = "phone_weihu.jpg";
+		}
+	</script>
+</body>
+</html>

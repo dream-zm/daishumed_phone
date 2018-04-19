@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    #如果目录存在就直接访问
+    RewriteCond %{REQUEST_FILENAME} !-d
+    #如果文件存在，就直接访问
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ https://www.daishumed.com [R,L]
+    #RewriteRule ^(.*)$ /index.html/$1 [QSA,PT,L]
+	
+	#重写URL
+	RewriteRule ^index.php/video/xueshu(.*)$ /video/xueshu$1 [QSA,PT,L]
+</IfModule>

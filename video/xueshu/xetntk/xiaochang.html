@@ -1,0 +1,54 @@
+<html>  
+<head>  
+<title>小肠</title>
+    <link rel="stylesheet" href="Activation_pc/reset.min.css">
+    <link rel="stylesheet" href="Activation_pc/index.css">
+    <link rel="stylesheet" href="Activation_pc/Audition1.css">
+        <link rel="stylesheet" href="Activation_pc/video_play.css">
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js" charset="utf-8"></script>
+</head>  
+<body>
+<div class="Audition_head_section">
+            <div class="Audition_section_left">
+                <!--视频区域-->
+             <div id="id_test_video" style="margin: 0 0 0 0;width:100%; height:100%;"></div>
+             <div class="div_div">
+                <span is-ok="true" class="div_div_span">正常</span>
+                <div class="div_div_yincang">
+                    <ul class="div_div_yincang_ul">
+                        <li nth-data="4">
+                            4倍
+                        </li>
+                        <li nth-data="2">
+                            2倍
+                        </li>
+                        <li nth-data="1.5">
+                            1.5倍
+                        </li>
+                        <li nth-data="1.25">
+                            1.25倍
+                        </li>
+                        <li nth-data="1">
+                            正常
+                        </li>
+                        <li nth-data="0.5">
+                            0.5倍
+                        </li>
+                    </ul>
+                </div>
+        </div>
+        <script type="text/javascript">
+                    var player =  new TcPlayer('id_test_video', {
+                    "m3u8": "http://1253453563.vod2.myqcloud.com/2e17e7c4vodgzp1253453563/945b1c057447398155413031546/wFm2K36qjpwA.mov",
+                    "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+                    "coverpic" : "http://www.test.com/myimage.jpg",
+                    "width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
+                    "height" : '100%'//视频的显示高度，请尽量使用视频分辨率高度
+                    });
+
+                </script>
+                
+            </div>  
+
+</body>  
+</html>  
