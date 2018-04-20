@@ -976,6 +976,7 @@
                         if (!check_user_state()) {
                             // this.$refs.toast.toastShow('请先登录')
                             alert('请先登录')
+                            window.location.href ='./login/land.html'
                             return
                         }
                         window.location.href = "./shopcar/active_coupon.html"
