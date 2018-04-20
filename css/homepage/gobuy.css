@@ -178,3 +178,7 @@
      position: relative;
     top: .13rem;
 }
+
+.content__p,.content__p img {
+    width: 100%;
+}

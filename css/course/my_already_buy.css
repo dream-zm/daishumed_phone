@@ -59,3 +59,7 @@
 	border-bottom: 0;
 }
 
+.content__p,.content__p img {
+	width: 100%;
+}
+
