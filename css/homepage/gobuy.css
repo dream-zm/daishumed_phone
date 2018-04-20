@@ -10,6 +10,7 @@
     position: fixed;
     z-index: 113;
     transition: all 0.5s;
+    bottom: -12rem;
 }
 .concealmentlayer_xuan{
     float: none !important;

@@ -501,7 +501,7 @@
 <script src="../../js/index_footer.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
-<script type="text/babel">
+<script>
 
     // checkUserState(true);
 
@@ -1215,7 +1215,7 @@
     function GouNum(){
         yaqooNetPost('Cart/index', '', function (data) {
             if (data['code'] == 1000) {
-                $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});
+               /* $(".title_div").css({"bottom":"-"+$(".concealmentlayer_div").height()+"px"});*/
                 for(i in data['data']){
                     if(data['data'][i].product_type != 2){
                         app.shopcar_num += 1
