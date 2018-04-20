@@ -277,15 +277,18 @@
     <div class="concealmentlayer" v-if="page_flag==2&&showbuy">
         <div class="concealmentlayer_div">
             <h4 class="concealmentlayer_h4">
-                <p>请选择考试方向</p>
+                <p class="concealmentlayer_title_h4">
+                    {{popupwindow_data_collar[current_type].course_type_name}}
+                    <span class="concealmentlayer_title_span">有效期： {{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
+                </p>
                 <img src="../../img/user_info/placeholder_03.png" alt="" @click="close">
             </h4>
             <div class="concealmentlayer_title">
                 <h4 class="concealmentlayer_title_h4">
-                    {{popupwindow_data_collar[current_type].course_type_name}}
+                    
                 </h4>
                 <p class="concealmentlayer_title_p">
-                    <span class="concealmentlayer_title_span">有效期： {{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
+                    
                     <span> 上线时间：{{popupwindow_data_collar[current_type].class_time}} </span>
                 </p>
             </div>
@@ -306,7 +309,7 @@
                 <div class="listofcourses_two">
                     <div class="listofcourses_two_div">
                         <p class="listofcourses_two_p">
-                            本班次课程
+                            请选择方向
                         </p>
                     </div>
                 </div>
@@ -314,15 +317,14 @@
             <ul class="curriculum_ul">
                 <!--套包里面是多选，普通的里面是单选-->
                 <li v-for="(data,class_index) in popupwindow_data_collar[current_type].course_list" @click="check_class_collar(class_index)">
-                    <div class="concealmentlayer_xuan" :class="{concealmentlayer_ullidiv:data.checks=='True'}"
+                    <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:data.checks=='True'}"
                          >
-                        <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
+                        {{data.direction_name}}
+                        <span class="price_span" v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
+                        <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
+                            <!-- <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span> -->
+                        </span>
                     </div>
-                    {{data.direction_name}}
-                    <span class="price_span" v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
-                    <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
-                        <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
-                    </span>
                 </li>
             </ul>
 
@@ -333,21 +335,37 @@
                 </div>
                 两年期课程保障
             </div>
-            <p class="title_div_left_p2">
-                ¥ {{collar_price}}
-            </p>
             <div class="concealmentlayer_bottom">
-                <div class="concealmentlayer_bottom_div">
+                <div class="concealmentlayer_bottom_div1"  v-if="Goto_buy2 == 0">
 
                     <div class="concealmentlayer_bottom_left"
-                         @click="buy('',false,popupwindow_data_collar[current_type].isbuy,true,popupwindow_data_collar[current_type].spec)">
+                        @click.stop="Goto_buyE(1)">
                         加入购物车
                     </div>
                     <div class="concealmentlayer_bottom_right"
-                         @click="buy('',true,popupwindow_data_collar[current_type].isbuy,false,popupwindow_data_collar[current_type].spec)">
+                        @click.stop="Goto_buyE(2)">
                         立即购买
                     </div>
                 </div>
+                <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy2 == 1 || Goto_buy2 == 2}" v-if="Goto_buy2 == 1 || Goto_buy2 == 2">
+                        <!--购物车 确认 -->
+                        <p class="title_div_left_p2"
+                           v-if="Goto_buy2 != 0">
+                            金额 :
+                            <span> ¥ {{collar_price}}</span>
+                        </p>
+                        <div class="yishi_GM"  v-if="Goto_buy2 == 1"
+                        @click.stop="buy('',false,popupwindow_data_collar[current_type].isbuy,true,popupwindow_data_collar[current_type].spec)">
+                            确认
+                        </div>
+                        <!-- 立即购买 确认 -->
+                        <div class="yishi_GM" v-if="Goto_buy2 == 2"
+                        @click.stop="buy('',true,popupwindow_data_collar[current_type].isbuy,false,popupwindow_data_collar[current_type].spec)">
+                            确 认
+                        </div>
+                    </div>
+                    <!-- 空 div-->
+                    <div style="width: 100%;height: 1.43rem;"></div>
             </div>
         </div>
     </div>
@@ -503,8 +521,8 @@
                 this.buy_two_years_flag = false;
             }, check_class_collar(index)
             {
+                this.Goto_buy2 = 0;
                 var tempData = this.popupwindow_data_collar[this.current_type].course_list;
-                // console.log(tempData)
                 //选择课程（套包）
                 if(tempData[index].checks == 'True'){
                     tempData[index].checks ='False'
@@ -513,7 +531,6 @@
                     tempData[index].checks ='True'
                     this.list_num++
                 }
-                // console.log(tempData)
                 //计算价格
                 this.conput_price(tempData);
 
@@ -528,7 +545,6 @@
                         }else{
                             this.collar_price += parseFloat(tempData[i].spec[this.buy_two_years_flag ? 1 : 0].discount_price);
                         }
-
                         x++;
                     }
                 }
@@ -836,10 +852,12 @@
                             if(Gobuy){
                                 alert("商品已加入购物车")
                             }
-
-
+                            
+                            alert(app.collar_price)
+                            alert(app.Goto_buy2+"***yaoshi")
+                            alert(jump2shopcar+"***true lijigoumai")
                             //是立即购买而且选中了课程才可以跳转
-                            if (jump2shopcar && this.collar_price != 0) {
+                            if (jump2shopcar && app.collar_price != 0) {
                                 // return;
                                 setTempData(JSON.stringify(temArray));
                                 window.location.href = "../shopcar/submit_order.html"

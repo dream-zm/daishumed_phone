@@ -10,6 +10,17 @@
     position: fixed;
     z-index: 113;
     transition: all 0.5s;
+    bottom: -12rem;
+}
+.concealmentlayer_title {
+    background: #fff;
+    padding: .4rem 0;
+    overflow: hidden;
+} 
+.admission_div_top_p {
+    float: left;
+    border-left: 0.08rem solid #0299ec;
+    padding-left: .2rem;
 }
 .concealmentlayer_xuan{
     float: none !important;
@@ -181,4 +192,14 @@
 
 .content__p,.content__p img {
     width: 100%;
+}
+
+.xuan_shop{
+    width: 6.6rem;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    height: .6rem;
+    text-overflow: ellipsis;
+    
 }
