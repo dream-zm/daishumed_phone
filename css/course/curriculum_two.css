@@ -273,8 +273,10 @@ body {
     /*list-style-type: circle!important;*/
     list-style:disc inside;
 }
-
-.contentdiv .content__p,.contentdiv .content__p ul li {
+.contentdiv .content__p {
+    padding: 0;
+}
+.contentdiv .content__p ul li {
     padding: 0 .3rem;
 }
 .contentdiv .content__divdiv li {
