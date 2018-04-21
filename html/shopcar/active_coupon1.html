@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <!-- <meta name="x5-fullscreen" content="true"> -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>卡券激活</title>
+    <!--flexible布局-->
+    <script src="../../js/flexible.js"></script>
+    <!--公共引用-->
+    <script src="../../js/jquery-2.1.4.js"></script>
+    <script src="../../js/index_top.js"></script>
+    <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/index.css">
+    <!--购物车公共.css-->
+    <link rel="stylesheet" href="../../css/shopcar/shopcar_index.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    
+    <!--本页面引入-->
+    <link rel="stylesheet" href="../../css/shopcar/voucher_activation.css">
+    <link rel="stylesheet" href="../../css/shopcar/coupon.css">
+</head>
+<body>
+<div id="app_body"  v-cloak>
+   <nav class="homepage_nav">
+        <img class="logo" src="../../img/homepage/logo_03.png">
+            卡券激活
+        <div class="homepage_nav_right" @click="jump2shopCar">
+            <img src="../../img/course/ShoppingCart_03.png" alt="">
+            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+        </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
+    <div class="kaquan" style="height: 18.95rem;width: 100%;background: url('../../img/shopcar/kaquanjihuo_02.png') no-repeat;background-size: 100% 100%;">
+        <img class="img" src="../../img/shopcar/kaquan_02.png">
+        <img class="img img_bottom" src="../../img/shopcar/kaquan_04.png">
+        <div class="kaquan_jihuo">
+            <p class="same_p">手机号：<input type="" name="" class="same" v-model="username"></p>
+            <div><p class="other_p">验证码：<input type="text" name="" v-model="input_code"></p>
+                <input type="button" class="button" v-model="yzm_tip" name="" @click="time" >
+            </div>
+            <p class="same_p">激活码：<input type="" name="" class="same" v-model="cdkey"></p>
+        </div>
+        <p class="tip">友情提示：优惠券激活码在图书背面刮开即见 !</p>
+        <input class="submit" type="button" name="" value="提交验证信息" @click="active">
+        <div class="contact">
+            <img src="../../img/shopcar/kaquan_07.png">
+            <p>想要获取免费直播、知识点推送等服务</p>
+            <p>请关注袋鼠医学微信公众号（daishumed）</p>
+        </div>
+        <div class="kaquan_con">
+            <p><img src="../../img/shopcar/kaquan_15.png">电话: 400-9001-765</p>
+            <p><img src="../../img/shopcar/kaquan_11.png">QQ群: 590385908</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<!--layui框架.js-->
+<script src="../../plug/layui/layui.js"></script>
+<!--插入页面元素统一JS-->
+
+<!--vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script src="../../js/index_footer.js"></script>
+<!--图形验证码-->
+<!-- <script src="../../js/graphic_veriry.js"></script> -->
+<script src="../../js/regular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel"> 
+    checkUserState(true)
+    var vm = new Vue({
+        el: '#app_body',
+        data: {
+            yzm_tip: '发送验证码',
+            cdkey: '',
+            username: '',
+            jhm: '',
+            is_ok: 'true',
+            phone_code: '',
+            shopcar_num: 0,
+            input_code: '',
+            yhq: ''
+        },
+        methods: {
+            //监听图形验证码输入变化
+            time(){
+                if (!checkTel(this.username)) {
+                    alert('请输入正确格式的手机号');
+                    return;
+                }
+                send_code(this.username)
+            }, active(){
+                send_resign_request(vm.username,vm.input_code)
+            },
+            initCoupon (yhq) {
+                //优惠券 16
+                localStorage.setItem("yhq_zd", yhq);
+                window.location.href ="./active_coupon_success02.html"
+            },initLearnCard (course_name, course_list) {
+                //学习卡 17
+                var data = {
+                    course_type_name: course_name,
+                    data_list: course_list
+                }
+                localStorage.setItem("coupon_detail_info", JSON.stringify(data));
+                window.location.href ="./active_coupon_success03.html"
+            },liveStreaming () {
+                //直播码 15
+             window.location.href ="./active_coupon_success01.html"
+            }
+        }
+//          
+    })
+
+    //发送验证码网络请求
+    function send_code() {
+        yaqooNetPost('User/send_code', {username: vm.username}, function (data) {
+            if (data['code'] == 1000) {
+                alert('发送成功')
+                vm.phone_code = data['phone_code']
+                var new_time = 60;
+                var clock = setInterval(function () {
+                    //倒计时 并存储
+                    --new_time;
+                    if (new_time <= 0) {
+                        vm.yzm_tip = '获取验证码';
+                        clearInterval(clock);
+                    } else {
+                        vm.yzm_tip = '重发验证码('+new_time+'s)';
+                    }
+                }, 1000)
+                
+            } else {
+                alert('发送失败')
+            }
+        })
+    }
+
+    function GouNum(){
+        yaqooNetPost('Cart/index', '', function (data) {
+            if (data['code'] == 1000) {
+                for(var i in data['data']){
+                    if(data['data'][i].product_type != 2){
+                        vm.shopcar_num += 1
+                    }
+                }
+            }
+        })
+    }
+    if (check_user_state()) {
+        GouNum();
+    }
+    
+     //  验证输入并发送注册网络请求
+    function send_resign_request(tel, r_code) {
+        //验证 
+        if (!checkTel(tel)) {
+            alert('请输入正确格式的手机号')
+            return;
+        }
+
+        if (!Verification(r_code) || !(vm.input_code == vm.phone_code)) {
+            alert('验证码错误')
+            return;
+        }
+
+        if (vm.cdkey == "") {
+            alert("请输入卡号")
+        } else if (vm.cdkey.length != 15 &&vm.cdkey.length != 16 && vm.cdkey.length != 17) {
+            alert("请输入正确的卡号")
+        } else {
+            yaqooNetPost('Activation/activation', {cdkey_txt: vm.cdkey}, function (data) {
+                if (data['code'] == 1000) {
+                    //添加成功
+                    if(vm.cdkey.length == 16)
+                    {//优惠券
+                        vm.yhq = data['coupon_money']
+                        vm.initCoupon(vm.yhq);
+                    }else if(vm.cdkey.length == 17){
+                        
+                        yaqooNetPost('Activation/get_direction', {course_direction: data['course_direction']}, function (datas) {
+                            if (datas['code'] == 1000) {
+                               vm.initLearnCard(data['course_type_name'],datas['data_list']);
+                            }
+                        })
+                    }else {
+                        vm.liveStreaming();
+                    }
+
+                } else {
+                    window.location.href = './active_coupon_fail.html'
+                }
+            })
+        }
+    }
+$(".Coupon_ul_click").on("click","li",function(){
+    window.location.href="../shopcar/submit_order.html"
+})
+
+</script>
+</html>

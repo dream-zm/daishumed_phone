@@ -1,163 +1,237 @@
-
-.Coupon_ul {
-    width: 100%;
-    background: #eceef0;
-    overflow: hidden;
-    padding: .3rem 0 3rem;
+.img {
+	width: 100%;
 }
 
-.Coupon_li {
-    margin: 0 .3rem .3rem;
-    overflow: hidden;
-    position: relative;
+.img_bottom {
+	margin: .61rem 0;
 }
 
-.Coupon_li_div {
-    width: 2.57rem;
-    height: 2rem;
-    overflow: hidden;
-    position: relative;
-    float: left;
-}
-.Coupon_li_div img{
-    width: 100%;
-    height: 100%;
-    display: block;
+.kaquan_jihuo,.kaquan_con {
+	width: 8.81rem;
+	margin: 0 .59rem;
 }
 
-.Coupon_li_div_sh {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: #fff;
+.kaquan_jihuo .same_p,.submit {
+	width: 8.42rem;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	color: #666;
+	font-size: .32rem;
+	background: #fff;
+	border-radius: 5px;
+	margin-bottom: .32rem;
+	padding-left: .39rem;
 }
 
-.Coupon_li_div_sh_p {
-    padding: .26rem 0 0 0;
-    font-weight: bold;
-    font-size: 0.4rem;
+.kaquan_jihuo div{
+	width: 8.8rem;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	color: #666;
+	font-size: .32rem;
+	margin-bottom: .32rem;
 }
 
-.Coupon_li_div_sh_p_span {
-    font-size: 0.72rem;
+.kaquan_jihuo div p {
+	width: 4.61rem;
+	background: #fff;
+	border-radius: 5px;
+	float: left;
+	padding-left: .39rem;
+}
+
+.button {
+	width: 3.16rem;
+	background: #fff;
+	border-radius: 5px;
+	float: right;
+	color: #ff8521;
+	height: 100%;
+	border: 0;
+}
+
+.kaquan_jihuo div p input {
+	border: 0;
+	line-height: 100%;
+	width: 2.6rem;
+	padding-left: .4rem;
+	color: #333;
+}
+
+.kaquan_jihuo .same {
+	height: 100%;
+	width: 6.5rem;
+	border: 0;
+	color: #333;
+	margin-left: .4rem;
+}
+
+.tip {
+	font-size: .32rem;
+	color: #333;
+	width: 100%;
+	text-align: center;
+	height: .65rem;
+	line-height: .65rem;
 
 }
 
-.Coupon_li_div_sh_p2 {
-    font-size: 0.4rem;
+.submit {
+	width: 8.81rem;
+	border: 0;
+	background: #ffb000;
+	color: #fff;
+	padding-left: 0;
+	margin: .56rem .59rem 0.64rem .59rem;
+
 }
 
-.Coupon_title {
-    width: 6.7rem;
-    float: left;
-    height: 1.95rem;
-    border: 1px solid #fff;
-    border-left: none;
-    background: #fff;
-    position: relative;
-    overflow: hidden;
+.contact {
+	width: 100;
+	text-align: center;
 }
 
-.Coupon_title_p {
-    font-size: .32rem;
-    color: #666666;
-    padding: .2666rem 0 .2rem;
-    margin-left: .2rem;
+.contact img {
+	display: inline-block;
+	width: 2.76rem;
+	margin-bottom: .35rem;
 }
 
-.Coupon_title_p2 {
-    font-size: .32rem;
-    color: #999999;
-    line-height: .46rem;
-    margin-left: .2rem;
+.contact p {
+	font-size: .28rem;
+	color: #333;
 }
 
-.Coupon_title_img {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: .826rem;
-    height: .826rem;
+.kaquan_con {
+	height: .96rem;
+	line-height: .96rem;
+	border: 1px solid #bbad92;
+	border-radius: 5px;
+	margin-top: .48rem;
 }
 
-.Coupon_li2 .Coupon_title1 {
-    border-color: #0199ec;
+.kaquan_con img {
+	width: .51rem;
+	height: .51rem;
+	margin-right: .19rem;
 }
 
-.Coupon_li2 .Coupon_title_img {
-    display: block;
+.kaquan_con p{
+	float: left;
+	width: 50%;
+	font-size: .32rem;
+	color: #444;
+	text-align: center;
 }
 
-.Coupon_li_two {
-    margin: 0 .3rem .3rem;
-    overflow: hidden;
-    position: relative;
+.fail_p {
+	width: 100%;
+	text-align: center;
+	font-size: .36rem;
+	color: #333;
+	height: .36rem;
+	line-height: .36rem;
 }
 
-.Coupon_li_two .Coupon_title {
-    color: #999 !important;
+.fail_p_other {
+	font-size: .48rem;
+	color: #e84a1b;
+	height: .48rem;
+	line-height: .48rem;
+	margin: .28rem 0 .19rem 0;
+}
+.fail_tip {
+	width: 8.8rem;
+	margin: 0 .6rem;
+	background: #ffb000;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	border-radius: 5px;
 }
 
-.Coupon_bottom {
-    /*position: fixed;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
-    /*width: 100%;*/
-    /*background: #fff;*/
-    /*overflow: hidden;*/
-    /*height: 1.28rem;*/
-    /*-moz-box-shadow: 0px -1px 5px #D9D9D9;*/
-    /*-webkit-box-shadow: 0px -1px 5px #D9D9D9;*/
-    /*box-shadow: 0px -1px 5px #D9D9D9;*/
-    background: #0299ec;
-    text-align: center;
-    width: 100%;
-    border-radius: .1rem;
-    padding: .4rem 0;
-    font-size: 0.4rem;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-}
-/*.Coupon_bottom__div{*/
-    /*margin: 0 auto .4rem;*/
-    /*width: 80%;*/
-    /*!*height: 100%;*!*/
-    /*padding: .2rem 0;*/
-    /*border-radius: 1rem;*/
-    /*background: #0199ec;*/
-    /*text-align: center;*/
-    /*!*line-height: 1.28rem;*!*/
-    /*font-size: .32rem;*/
-    /*color: #fff;*/
-/*}*/
-
-.Coupon_bottom_p {
-    float: left;
-    padding-left: .3rem;
-    font-size: .32rem;
-    line-height: 1.28rem;
+.fail_tip a {
+	display: block;
+	width: 100%;
+	color: #fff;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	text-align: center;
+	font-size: .4rem;
 }
 
-.Coupon_bottom_p span {
-    color: #ff4e00;
-    font-size: .4rem;
+.course {
+	width: 100%;
+	text-align: center;
+	position: relative;
 }
 
-.Coupon_bottom_div {
-    height: 100%;
-    text-align: center;
-    padding: 0 1rem;
-    font-size: .32rem;
-    color: #fff;
-    float: right;
-    background: #0299ec;
-    line-height: 1.28rem;
+.course_p {
+	width: 100%;
+	text-align: center;
+	color: #e74141;
+	font-size: .64rem;
+	font-weight: bold;
+	position: absolute;
+	top: 2.45rem;
+	left: 0;
 }
 
 
+.course_div {
+	width: 100%;
+	position: absolute;
+	bottom: 1rem;
+	left: 0;
+	color: #fff;
+	font-size: .36rem; 
+	text-align: left;
+	
+}
 
+.course_div div{
+	width: 7rem;
+	padding-left: 2.01rem;
+}
+
+.course_div  p {
+	width: 100%;
+	text-align: center;
+}
+
+
+.course_div  a {
+	display: inline-block;
+	width: 2.64rem;
+	height: .83rem;
+	background: #ffb50d;
+	border-radius: 5px;
+	line-height: .83rem;
+	color: #fff;
+}
+
+.course_div ul li{
+	float: left;
+	height: .66rem;
+	line-height: .66rem;
+	padding: 0 .35rem;
+	border: 1px solid #fff;
+	margin-bottom: .28rem;
+	margin-right: .23rem;
+}
+.course_div p {
+	height: .36rem;
+	line-height: .36rem;
+}
+
+.select_course {
+	background: #fff;
+	color: #e74141;
+}
+
+.yhq_tip p {
+	text-align: left;
+	font-size: .28rem;
+	width: 6.2rem;
+	height: auto;
+	line-height: .48rem;
+}
