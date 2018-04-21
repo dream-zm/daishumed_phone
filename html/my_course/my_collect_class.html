@@ -235,28 +235,20 @@
         <div class="concealmentlayer" v-if="page_flag==1&&showbuy">
             <div class="concealmentlayer_div">
                 <h4 class="concealmentlayer_h4">
-                    <p>请选择考试方向</p>
-                    <img src="../../img/user_info/placeholder_03.png" alt="" @click="close">
-                </h4>
-                <div class="concealmentlayer_title">
-                    <h4 class="concealmentlayer_title_h4">
-                        <!-- {{popupwindow_data[current_buy].course_type_name}} -->
-                    </h4>
-
                     <p class="concealmentlayer_title_h4">
                          {{popupwindow_data[current_buy].course_type_name}}
                         <span class="concealmentlayer_title_span">有效期： {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>
-                        <!-- <span> 上线时间：{{popupwindow_data[current_buy].class_time}} </span> -->
                     </p>
-                </div>
-                <div class="listofcourses_two">
-                    <div class="listofcourses_two">
-                        <div class="listofcourses_two_div">
-                            <p class="listofcourses_two_p">
-                                本班次课程
-                            </p>
-                        </div>
-                    </div>
+                    <img src="../../img/user_info/placeholder_03.png" alt="" @click="close">
+                </h4>
+                <div class="concealmentlayer_title" style="border: none;margin-bottom: -.3rem">
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem;padding:0 0 0 .2rem;">
+                        请选择方向
+                    </p>
+                    <!--<p class="concealmentlayer_title_p">-->
+                    <!--<span class="concealmentlayer_title_span">有效期： {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>-->
+                    <!--<span> 上线时间：{{popupwindow_data[current_buy].class_time}} </span>-->
+                    <!--</p>-->
                 </div>
                 <ul class="curriculum_ul">
                     <!--套包里面是多选，普通的里面是单选-->
@@ -267,7 +259,7 @@
                            {{data.direction_name}}
                         <span v-if="data.spec[0].discount_price == null" :class="{concealmentlayer_ullidiv_span:class_index==current_buy}">（￥{{data.spec[0].price}}）</span>
                         <span v-if="data.spec[0].discount_price != null" :class="{concealmentlayer_ullidiv_span:class_index==current_buy}">（￥{{data.spec[0].discount_price}}）
-                            <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
+                            <!-- <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span> -->
                         </span>
                         </div>
                         
@@ -291,7 +283,7 @@
                         <!-- @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)" -->
                         <!-- @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)" -->
                         <div class="concealmentlayer_bottom_left"
-                             @click="Goto_buyi(1)" v-if="" >
+                             @click="Goto_buyi(1)">
                             加入购物车
                         </div>
                         <div class="concealmentlayer_bottom_right"
@@ -334,52 +326,39 @@
         <div class="concealmentlayer" v-if="page_flag==2&&showbuy">
             <div class="concealmentlayer_div">
                 <h4 class="concealmentlayer_h4">
-                    <p>请选择考试方向</p>
+                    <p class="concealmentlayer_title_h4">
+                        {{popupwindow_data_collar[current_type].course_type_name}}
+                        <span class="concealmentlayer_title_span">有效期： {{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
+                    </p>
                     <img src="../../img/user_info/placeholder_03.png" alt="" @click="close">
                 </h4>
                 <div class="concealmentlayer_title">
-                    <h4 class="concealmentlayer_title_h4">
-                        {{popupwindow_data_collar[current_type].course_type_name}}
-                    </h4>
-                    <p class="concealmentlayer_title_p">
-                        <span class="concealmentlayer_title_span">有效期： {{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
-                       <!--  <span> 上线时间：{{popupwindow_data_collar[current_type].class_time}} </span> -->
-                    </p>
-                </div>
-
-                <div class="classification">
-                    <p>
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem;padding:0;padding-top: .3rem">
                         请选择分类
                     </p>
-                    <ul class="classification_ul">
-                        <li :class="{classification_ulli:type_index==current_type}"
-                            v-for="(data,type_index) in popupwindow_data_collar" @click="check_type(type_index)">
-                            {{data.direction_name}}
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="listofcourses_two">
-                    <div class="listofcourses_two">
-                        <div class="listofcourses_two_div">
-                            <p class="listofcourses_two_p">
-                                本班次课程
-                            </p>
-                        </div>
-                    </div>
+                <ul class="classification_ul">
+                    <li :class="{classification_ulli:type_index==current_type}" v-for="(data,type_index) in popupwindow_data_collar" @click="check_type(type_index)">
+                        {{data.direction_name}}
+                    </li>
+                </ul>
+                <div class="concealmentlayer_title">
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
+                        请选择方向
+                    </p>
                 </div>
                 <ul class="curriculum_ul">
                     <!--套包里面是多选，普通的里面是单选-->
                     <li v-for="(data,class_index) in popupwindow_data_collar[current_type].course_list">
-                        <div class="concealmentlayer_xuan" :class="{concealmentlayer_ullidiv:data.checks=='True'}"
+                        <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:data.checks=='True'}"
                              @click="check_class_collar(class_index)">
-                            <img src="../../img/course/concealmentlayer_xuan_03.png" alt="">
+                             {{data.direction_name}}
+                             <span v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
+                             <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
+                                 <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
+                             </span>
                         </div>
-                        {{data.direction_name}}
-                        <span v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
-                        <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
-                            <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
-                        </span>
+                        
                     </li>
                 </ul>
 
@@ -393,18 +372,34 @@
                 <p class="title_div_left_p2">
                     ¥ {{collar_price}}
                 </p>
-                <div class="concealmentlayer_bottom">
-                    <div class="concealmentlayer_bottom_div">
 
-                        <div class="concealmentlayer_bottom_left"
-                             @click="buy('',false,'',true,popupwindow_data_collar[current_type].spec)">
+                <div class="concealmentlayer_bottom">
+                    <div class="concealmentlayer_bottom_div1" v-if="Goto_buy2 == 0">
+                        <!-- 加入购物车 和 立即购买 -->
+                        <div class="concealmentlayer_bottom_left" @click="Goto_buyE(1)">
                             加入购物车
                         </div>
-                        <div class="concealmentlayer_bottom_right"
-                             @click="buy('',true,'',false,popupwindow_data_collar[current_type].spec)">
+                        <div class="concealmentlayer_bottom_right" @click="Goto_buyE(2)">
                             立即购买
                         </div>
                     </div>
+                    <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy2 == 1 || Goto_buy2 == 2}" v-if="Goto_buy2 == 1 || Goto_buy2 == 2">
+                        <!--购物车 确认 -->
+                        
+                        <p class="title_div_left_p2" v-if="Goto_buy2 != 0">
+                            金额 :
+                            <span> ¥ {{collar_price}}</span>
+                        </p>
+                        <div class="yishi_GM" v-if="Goto_buy2 == 1" @click="buy('',false,'',true,popupwindow_data_collar[current_type].spec)">
+                            确认
+                        </div>
+                        <!-- 立即购买 确认 -->
+                        <div class="yishi_GM" v-if="Goto_buy2 == 2" @click="buy('',true,'',false,popupwindow_data_collar[current_type].spec)">
+                            确 认
+                        </div>
+                    </div>
+                    <!-- 空 div-->
+                    <div style="width: 100%;height: 1.43rem;"></div>
                 </div>
             </div>
         </div>
@@ -537,13 +532,28 @@
                     teacher_photo: ""
                 }
             ],
-             Goto_buy1: ''
+             Goto_buy1: '',
+             Goto_buy2:"",
         },
         methods: {
 
             // 取消收藏 couser_type  couser_id
             Goto_buyi (buy) {
                 this.Goto_buy1 = buy;
+            },
+            Goto_buyE (buy) {
+                this.Goto_buy2 = buy;
+
+                            var tempData = app.popupwindow_data_collar[app.current_type].course_list;
+                for (var i=0;i<tempData.length;i++){
+                    tempData[i].checks = 'True'
+                }
+                
+                if(this.popupwindow_data_collar[0].spec[0].discount_price == null){
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }else{
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }
             },
             delete_free(a,b){
 

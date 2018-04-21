@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="telephone=no" />
     <meta name="full-screen" content="yes">
     <!-- <meta name="x5-fullscreen" content="true"> -->
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>袋鼠医学-国家中医药管理局直属单位中国中医药出版社旗下专业医学知识服务提供商，国家中医医师资格考试技能操作规范化视频唯一授权发布平台，国家执业医师资格考试、国家执业药师资格考试、中医师承与确有专长考试考核培训辅导机构。</title>
     <!--flexible布局-->
     <script src="../js/flexible.js"></script>
@@ -26,158 +26,205 @@
     <link rel="stylesheet" href="../css/homepage/homepage.css">
     <link rel="stylesheet" href="../css/homepage/dredge.css">
 </head>
+
 <body>
-<div id="app_body" v-cloak>
-    <!--未开通弹框-->
-    <div class="isDredges" v-if="IsDredge">
-        <div class="isDredge">
-            <div class="isDredge_top">
-                提示
-                <div  class="isDredge_top_img">
-                    <img style="width:100%" src="../img/user_info/cha_03.png" alt="" @click="FDredge">
+    <div id="app_body" v-cloak>
+        <!--未开通弹框-->
+        <div class="isDredges" v-if="IsDredge">
+            <div class="isDredge">
+                <div class="isDredge_top">
+                    提示
+                    <div class="isDredge_top_img">
+                        <img style="width:100%" src="../img/user_info/cha_03.png" alt="" @click="FDredge">
+                    </div>
                 </div>
+                <div class="isDredge_bottom">
+                    <div class="isDredge_bottom_img">
+                        <img style="width:100%" src="../img/user_info/weikaitong_03.png" alt="">
+                    </div>
+                    <div class="isDredge_bottom_text">
+                        <p style="font-size: .48rem;text-align: center;width: 100%;">服务暂未开通</p>
+                        <p style="font-size: .34rem;text-align: center;width: 100%;margin-top: .1rem;">如有疑问请拨打 400-9001-765 咨询</p>
+                    </div>
+                </div>
+
             </div>
-            <div class="isDredge_bottom">
-                <div class="isDredge_bottom_img">
-                    <img style="width:100%" src="../img/user_info/weikaitong_03.png" alt="">
+        </div>
+        <!--原页-->
+        <nav class="homepage_nav">
+            <img class="logo" src="../img/homepage/logo_03.png"> 首页
+            <div class="homepage_nav_right" @click="jump2shopCars">
+                <img src="../img/course/ShoppingCart_03.png" alt="">
+                <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+            </div>
+            <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+        </nav>
+
+
+        <!--轮播图-->
+        <div class="homepage">
+            <div class="swiper-container" style="overflow: visible">
+                <div class="swiper-wrapper">
                 </div>
-                <div class="isDredge_bottom_text">
-                    <p style="font-size: .48rem;text-align: center;width: 100%;">服务暂未开通</p>
-                    <p style="font-size: .34rem;text-align: center;width: 100%;margin-top: .1rem;">如有疑问请拨打 400-9001-765 咨询</p>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination" style=""></div>
+            </div>
+
+
+            <div class="homepage_div" @click="to_message">
+                <img class="homepage_img" src="../img/homepage/homepage_03.png" alt="">
+                <div class="homepage_div_div">
+                    <p class="homepage_p">
+                        {{message_info.message_info}} {{message_info.inputtime}}
+                    </p>
                 </div>
             </div>
 
         </div>
-    </div>
-    <!--原页-->
-    <nav class="homepage_nav">
-        <img class="logo" src="../img/homepage/logo_03.png">
-        首页
-        <div class="homepage_nav_right" @click="jump2shopCars">
-            <img src="../img/course/ShoppingCart_03.png" alt="">
-            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+
+        <!--跳转功能-->
+        <div class="various">
+            <ul class="various_ul">
+                <li>
+                    <img src="../img/homepage/Subject1_07.png" alt="" @click="jump_tab(0)">
+                    <p>执业医师</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject2_09.png" alt="" @click="jump_tab(2)">
+                    <p>中医师承</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject3_11.png" alt="" @click="jump_tab(1)">
+                    <p>执业药师</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject4_13.png" alt="" @click="jump_tab(4)">
+                    <p>免费课程</p>
+                </li>
+
+                <li>
+                    <img src="../img/homepage/Subject5_20.png" alt="" @click="jump_tab(5)">
+                    <p>精选图书</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject6_21.png" alt="" @click="jump_tab(3)">
+                    <p>精选音频</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject7_22.png" alt="" @click="jump_tab(6)">
+                    <p>卡券激活</p>
+                </li>
+                <li>
+                    <img src="../img/homepage/Subject8_07.png" alt="" @click="jump_tab(7)">
+                    <p>袋鼠商城</p>
+                </li>
+            </ul>
         </div>
-        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
-    </nav>
-
-
-    <!--轮播图-->
-    <div class="homepage">
-        <div class="swiper-container" style="overflow: visible">
-            <div class="swiper-wrapper">
-            </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination" style=""></div>
+        <div class="homepage_guanggao">
+            <img src="../img/homepage/guanggao_02.png" alt="">
         </div>
-
-
-        <div class="homepage_div" @click="to_message">
-            <img class="homepage_img" src="../img/homepage/homepage_03.png" alt="">
-            <div class="homepage_div_div">
-                <p class="homepage_p">
-                    {{message_info.message_info}} {{message_info.inputtime}}
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <!--跳转功能-->
-    <div class="various">
-        <ul class="various_ul">
-            <li>
-                <img src="../img/homepage/Subject1_07.png" alt="" @click="jump_tab(0)">
-                <p>执业医师</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject2_09.png" alt="" @click="jump_tab(2)">
-                <p>中医师承</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject3_11.png" alt="" @click="jump_tab(1)">
-                <p>执业药师</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject4_13.png" alt="" @click="jump_tab(4)">
-                <p>免费课程</p>
-            </li>
-
-            <li>
-                <img src="../img/homepage/Subject5_20.png" alt="" @click="jump_tab(5)">
-                <p>精选图书</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject6_21.png" alt="" @click="jump_tab(3)">
-                <p>精选音频</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject7_22.png" alt="" @click="jump_tab(6)">
-                <p>卡券激活</p>
-            </li>
-            <li>
-                <img src="../img/homepage/Subject8_07.png" alt="" @click="jump_tab(7)">
-                <p>袋鼠商城</p>
-            </li>
-        </ul>
-    </div>
-    <div class="homepage_guanggao">
-        <img src="../img/homepage/guanggao_02.png" alt="">
-    </div>
-    <!--执业医师-->
-    <div class="pharmacist">
-        <div class="admission_div">
-            <div class="admission_div_top">
-                <p class="admission_div_top_p admission_div_top_p2" style="border-left-color: #0299ec">
-                    执业医师
-                </p>
-                <div class="admission_div_right" @click="jump_tab(0)">
-                    查看全部
-                    <img class="admission_div_right_img" src="../img/homepage/youkuohao_29.png" alt="">
+        <!--执业医师-->
+        <div class="pharmacist">
+            <div class="admission_div">
+                <div class="admission_div_top">
+                    <p class="admission_div_top_p admission_div_top_p2" style="border-left-color: #0299ec">
+                        执业医师
+                    </p>
+                    <div class="admission_div_right" @click="jump_tab(0)">
+                        查看全部
+                        <img class="admission_div_right_img" src="../img/homepage/youkuohao_29.png" alt="">
+                    </div>
                 </div>
-            </div>
-            <div class="pharmacist_div" v-for="data in course_data1" @click="jump2details(1,data.course_type,0)">
-                <div class="pharmacist_left">
-                    <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
-                </div>
-                <div class="pharmacist_right">
-                    <h4 class="pharmacist_right_h4">
-                       {{data.course_type_name}}
-                        <!-- {{(data.time_num!=0||data.question_num!=0)?'(已更新':''}}
+                <div class="pharmacist_div" v-for="data in course_data1" @click="jump2details(1,data.course_type,0)">
+                    <div class="pharmacist_left">
+                        <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
+                    </div>
+                    <div class="pharmacist_right">
+                        <h4 class="pharmacist_right_h4">
+                            {{data.course_type_name}}
+                            <!-- {{(data.time_num!=0||data.question_num!=0)?'(已更新':''}}
                         {{data.time_num!=0?formatHour(data.time_num)+'小时课':''}}
                         {{data.question_num!=0?data.question_num+'道习题':''}}
                         {{(data.time_num!=0||data.question_num!=0)?')':''}}  -->
 
-                    </h4>
-                    <p class="pharmacist_right_p">
-                        <span>可选：</span>{{data.direction_name}}
-                    </p>
-                   <p class="pharmacist_right_p1">
-                        <span style="color: #999999;">
-                            {{formatHour(data.time_num) == 0? 0 : formatHour(data.time_num)}}小时
-                        </span>
-                        <span style="margin-left:.37rem">
-                            有效期 : {{data.down_time}}
-                        </span>
-                    </p>
-                    <div class="listofcourses_bottom">
-                        <p v-if="data.d_course_price != null">¥{{data.d_course_price}}</p>
-                        <p v-if="data.d_course_price != null" class="original_price"><del>¥{{data.course_price}}</del></p>
-                        <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
-                        <img src="../img/homepage/gouwuche_03.png" alt="" class="listofcourses_bottom_img"
-                             v-on:click.stop="to_buy(data.course_type,false,data.course_thumb)">
-                    </div>
+                        </h4>
+                        <p class="pharmacist_right_p">
+                            <span>可选：</span>{{data.direction_name}}
+                        </p>
+                        <p class="pharmacist_right_p1">
+                            <span style="color: #999999;">
+                                {{formatHour(data.time_num) == 0? 0 : formatHour(data.time_num)}}小时
+                            </span>
+                            <span style="margin-left:.37rem">
+                                有效期 : {{data.down_time}}
+                            </span>
+                        </p>
+                        <div class="listofcourses_bottom">
+                            <p v-if="data.d_course_price != null">¥{{data.d_course_price}}</p>
+                            <p v-if="data.d_course_price != null" class="original_price">
+                                <del>¥{{data.course_price}}</del>
+                            </p>
+                            <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
+                            <img src="../img/homepage/gouwuche_03.png" alt="" class="listofcourses_bottom_img" v-on:click.stop="to_buy(data.course_type,false,data.course_thumb)">
+                        </div>
 
+                    </div>
                 </div>
+
+                <!--  <div class="admission_bottom" @click="getCourseData(1)">
+                                <p>
+                                    <img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批
+                                </p>
+                            </div> -->
+            </div>
+            <!--执业药师-->
+
+            <div class="admission_div">
+                <div class="admission_div_top">
+                    <p class="admission_div_top_p admission_div_top_p3">
+                        执业药师
+                    </p>
+                    <div class="admission_div_right" @click="jump_tab(1)">
+                        查看全部
+                        <img class="admission_div_right_img" src="../img/homepage/youkuohao_29.png" alt="">
+                    </div>
+                </div>
+                <div class="pharmacist_div" v-for="data in course_data2" @click="jump2detail(2,data.course_type,0)">
+                    <div class="pharmacist_left">
+                        <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
+                    </div>
+                    <div class="pharmacist_right">
+                        <h4 class="pharmacist_right_h4">
+                            {{data.course_type_name}}
+                            <!-- {{data.course_type_describe}} 
+                            {{(data.time_num!=0||data.question_num!=0)?'(':''}} 
+                            {{data.time_num!=0?formatHour(data.time_num)+'小时课':''}}
+                            {{data.question_num!=0?data.question_num+'道习题':''}} 
+                            {{(data.time_num!=0||data.question_num!=0)?')':''}} -->
+                        </h4>
+                        <p class="pharmacist_right_p">
+                            <span>可选：</span>{{data.direction_name}}
+                        </p>
+                        <div class="listofcourses_bottom">
+                            <p v-if="data.d_course_price != null">¥{{data.d_course_price}}</p>
+                            <p v-if="data.d_course_price != null" class="original_price">
+                                <del>¥{{data.course_price}}</del>
+                            </p>
+                            <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
+                            <img src="../../img/course/gouwuche_13.png" alt="" class="listofcourses_bottom_img" v-on:click.stop="to_buy(data.course_type,true,data.course_thumb)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="admission_bottom" @click="getCourseData(2)">
+                    <p>
+                        <img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批
+                    </p>
+                </div> -->
             </div>
 
-           <!--  <div class="admission_bottom" @click="getCourseData(1)">
-                <p>
-                    <img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批
-                </p>
-            </div> -->
-        </div>
-        <!--免费专区-->
-       <!-- <div class="admission">
+            <!--免费专区-->
+            <!-- <div class="admission">
             <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
              <div class="admission_div homepage_mf">
                  <div class="admission_div_top">
@@ -211,48 +258,46 @@
                  </div>
              </div>
          </div> -->
-        <!--关于我们-->
-        <div class="homepage_guanyu">
-            <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
-            <div  class="admission_div">
-                <div class="admission_div_top homepage_guanyu_top">
-                    <p class="admission_div_top_p">
-                        关于我们
-                    </p>
-                </div>
-                <div>
-                    <img style="width: 100%;" src="../img/homepage/guanyu_03.png" alt="">
-                </div>
-                <div>
-                    <div>
-                        <span class="homepage_guanyu_txtT homepage_guanyu_txtcolor1">袋鼠医学（daishumed.com）</span>
-                        <p class="homepage_guanyu_txtB">
-                            是国家中医药管理局直属单位——中国中医药出版社旗下专业医学知识服务提供商，国家中医医师资格考试技能操作规范化视频唯一授权发布平台。
-                            我们聚焦医学领域的知识服务，包括培训教育、学术交流、知识普及与文化传播等，依托权威的平台背景和专业的技术实力，致力于为广大用户提供
-                            个性化、智能化的卓越学习体验，打造国内医学知识服务的旗舰品牌。
+            <!--关于我们-->
+            <div class="homepage_guanyu">
+                <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
+                <div class="admission_div">
+                    <div class="admission_div_top homepage_guanyu_top">
+                        <p class="admission_div_top_p">
+                            关于我们
                         </p>
                     </div>
                     <div>
-                        <span class="homepage_guanyu_txtT  homepage_guanyu_txtcolor2">中国中医药出版社</span>
-                        <p  class="homepage_guanyu_txtB">
-                            是国家中医、中西医结合执业医师资格考试大纲与细则、全国中医药专业技术资格考试大纲与细则唯一授权出版单位，
-                            同时也是全国中医药行业规划教材唯一出版基地。
-                        </p>
+                        <img style="width: 100%;" src="../img/homepage/guanyu_03.png" alt="">
+                    </div>
+                    <div>
+                        <div>
+                            <span class="homepage_guanyu_txtT homepage_guanyu_txtcolor1">袋鼠医学（daishumed.com）</span>
+                            <p class="homepage_guanyu_txtB">
+                                是国家中医药管理局直属单位——中国中医药出版社旗下专业医学知识服务提供商，国家中医医师资格考试技能操作规范化视频唯一授权发布平台。 我们聚焦医学领域的知识服务，包括培训教育、学术交流、知识普及与文化传播等，依托权威的平台背景和专业的技术实力，致力于为广大用户提供
+                                个性化、智能化的卓越学习体验，打造国内医学知识服务的旗舰品牌。
+                            </p>
+                        </div>
+                        <div>
+                            <span class="homepage_guanyu_txtT  homepage_guanyu_txtcolor2">中国中医药出版社</span>
+                            <p class="homepage_guanyu_txtB">
+                                是国家中医、中西医结合执业医师资格考试大纲与细则、全国中医药专业技术资格考试大纲与细则唯一授权出版单位， 同时也是全国中医药行业规划教材唯一出版基地。
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--联系我们-->
-        <div class="homepage_guanyu">
-            <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
-            <div  class="admission_div">
-                <div class="admission_div_top homepage_guanyu_top">
-                    <p class="admission_div_top_p" style="border-left-color: #37af12">
-                        联系我们
-                    </p>
-                </div>
-                <div class="homepage_lianxi">
-                    <div class="homepage_lianxiT homepage_lianxiTl">
+            <!--联系我们-->
+            <div class="homepage_guanyu">
+                <div style="width: 100%;height: .3rem;background: #eceef0;"></div>
+                <div class="admission_div">
+                    <div class="admission_div_top homepage_guanyu_top">
+                        <p class="admission_div_top_p" style="border-left-color: #37af12">
+                            联系我们
+                        </p>
+                    </div>
+                    <div class="homepage_lianxi">
+                        <div class="homepage_lianxiT homepage_lianxiTl">
 
                             <div class="homepage_lianxiT_div_img">
                                 <img style="width: 100%;" src="../img/homepage/erweima1_07.png" alt="">
@@ -262,87 +307,43 @@
                                 袋鼠医学微信公众号
                             </p>
 
-                    </div>
-                    <div class="homepage_lianxiT homepage_lianxiTr">
+                        </div>
+                        <div class="homepage_lianxiT homepage_lianxiTr">
 
                             <div class="homepage_lianxiT_div_img">
-                                <img  style="width: 102%;" src="../img/homepage/erweima1_07.png" alt="">
+                                <img style="width: 102%;" src="../img/homepage/erweima1_07.png" alt="">
                             </div>
 
                             <p class="homepage_lianxiT_txt" style="text-align: center">
-                                加卡丁老师（kading33）
-                                拉入官方微信交流群
+                                加卡丁老师（kading33） 拉入官方微信交流群
                             </p>
 
-                    </div>
-                    <div  class="homepage_lianxiB">
-                        <div class="homepage_lianxiBl">
-                            <img style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../img/homepage/dianhua_10.png" alt="">
-                            电话: 010-64405382
                         </div>
-                        <div class="homepage_lianxiBl">
-                            <img  style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../img/homepage/qq_07.png" alt="">
-                            QQ群: 590385908
+                        <div class="homepage_lianxiB">
+                            <div class="homepage_lianxiBl">
+                                <img style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../img/homepage/dianhua_10.png" alt=""> 电话: 010-64405382
+                            </div>
+                            <div class="homepage_lianxiBl">
+                                <img style="width: .55rem;vertical-align: middle;margin-right: .1rem" src="../img/homepage/qq_07.png" alt=""> QQ群: 590385908
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="homepage_bottom_shang">
-            <span class="homepage_bottom_shangtxt">
-                中国中医药出版社 版权所有 京ICP备12043164号-6
-            </span><br/>
-            <span class="homepage_bottom_shangtxt">
-                Copyright 2017 CPTCM Co.,Ltd All Rights Reserved.
-            </span>
-        </div>
-    </div>
-    <!--执业药师-->
-    <!-- <div class="pharmacist_two">
-        <div class="admission_div">
-            <div class="admission_div_top">
-                <p class="admission_div_top_p admission_div_top_p3">
-                    执业药师
-                </p>
-                <div class="admission_div_right" @click="jump_tab(1)">
-                    查看全部
-                    <img class="admission_div_right_img" src="../../img/homepage/youkuohao_29.png" alt="">
-                </div>
+            <div class="homepage_bottom_shang">
+                <span class="homepage_bottom_shangtxt">
+                    中国中医药出版社 版权所有 京ICP备12043164号-6
+                </span>
+                <br/>
+                <span class="homepage_bottom_shangtxt">
+                    Copyright 2017 CPTCM Co.,Ltd All Rights Reserved.
+                </span>
             </div>
-            <div class="pharmacist_div" v-for="data in course_data2" @click="jump2detail(2,data.course_type,0)">
-                <div class="pharmacist_left">
-                    <img class="pharmacist_left_img" :src="data.course_thumb" alt="">
-                </div>
-                <div class="pharmacist_right">
-                    <h4 class="pharmacist_right_h4">
-                        【{{data.course_type_name}}】{{data.course_type_describe}}
-                        {{(data.time_num!=0||data.question_num!=0)?'(':''}}
-                        {{data.time_num!=0?formatHour(data.time_num)+'小时课':''}}
-                        {{data.question_num!=0?data.question_num+'道习题':''}}
-                        {{(data.time_num!=0||data.question_num!=0)?')':''}}
-                    </h4>
-                    <p class="pharmacist_right_p">
-                        <span>可选：</span>{{data.direction_name}}
-                    </p>
-                    <div class="listofcourses_bottom">
-                        <p v-if="data.d_course_price != null">¥{{data.d_course_price}}</p>
-                        <p v-if="data.d_course_price != null" class="original_price"><del>¥{{data.course_price}}</del></p>
-                        <p v-if="data.d_course_price == null">¥{{data.course_price}}</p>
-                        <img src="../../img/course/gouwuche_13.png" alt="" class="listofcourses_bottom_img"
-                            v-on:click.stop="to_buy(data.course_type,true,data.course_thumb)"></div>
-                </div>
-            </div>
+        </div>
 
-            <div class="admission_bottom" @click="getCourseData(2)">
-                <p>
-                    <img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批
-                </p>
-            </div>
-        </div>
-    </div> -->
 
-    <!--中医师承-->
-   <!--  <div class="pharmacist_two pharmacist_four">
+        <!--中医师承-->
+        <!--  <div class="pharmacist_two pharmacist_four">
         <div class="admission_div">
             <div class="admission_div_top">
                 <p class="admission_div_top_p admission_div_top_p3">
@@ -385,51 +386,51 @@
         </div>
     </div> -->
 
-    <!--卫生管理-->
-    <!--<div class="pharmacist_two pharmacist_four">-->
+        <!--卫生管理-->
+        <!--<div class="pharmacist_two pharmacist_four">-->
         <!--<div class="admission_div">-->
-            <!--<div class="admission_div_top">-->
-                <!--<p class="admission_div_top_p admission_div_top_p3">-->
-                    <!--卫生管理-->
-                <!--</p>-->
-                <!--<div class="admission_div_right" @click="jump_tab(3)">-->
-                    <!--查看全部-->
-                    <!--<img class="admission_div_right_img" src="../../img/homepage/youkuohao_29.png" alt="">-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="pharmacist_div" v-for="data in course_data4" @click="jump2detail(4,0,data.course_id,data.is_free)">-->
-                <!--<div class="pharmacist_left">-->
-                    <!--<img class="pharmacist_left_img" :src="data.course_thumb" alt="">-->
-                <!--</div>-->
-                <!--<div class="pharmacist_right">-->
-                    <!--<h4 class="pharmacist_right_h4">-->
-                        <!--{{data.course_name}}-->
-                    <!--</h4>-->
-                    <!--<p class="pharmacist_right_p">-->
-                        <!--{{data.teacher_name}}-&#45;&#45;{{data.teacher_unit}}-->
-                    <!--</p>-->
-                    <!--<p class="pharmacist_right_p">-->
-                        <!--<span>时长：</span>-->
-                        <!--{{formatHour(data.time_num)}}小时/{{data.subject_num}}节课-->
-                    <!--</p>-->
-                    <!--<div class="listofcourses_bottom">-->
-                        <!--<p v-if="data.d_course_price != null">¥{{data.course_price}}</p>-->
-                        <!--<p v-if="data.d_course_price != null" class="original_price">¥{{data.d_course_price}}</p>-->
-                        <!--<p v-if="data.d_course_price == null">¥{{data.course_price}}</p>-->
-                        <!--<img src="../../img/course/gouwuche_13.png" alt="" class="listofcourses_bottom_img"-->
-                            <!--v-on:click.stop="buy_other(data.course_id, data.isbuy)"></div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="admission_bottom" @click="getCourseData(4)">-->
-                <!--<p>-->
-                    <!--<img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批-->
-                <!--</p>-->
-            <!--</div>-->
+        <!--<div class="admission_div_top">-->
+        <!--<p class="admission_div_top_p admission_div_top_p3">-->
+        <!--卫生管理-->
+        <!--</p>-->
+        <!--<div class="admission_div_right" @click="jump_tab(3)">-->
+        <!--查看全部-->
+        <!--<img class="admission_div_right_img" src="../../img/homepage/youkuohao_29.png" alt="">-->
         <!--</div>-->
-    <!--</div>-->
-    <!--免费专区-->
-    <!--  <div class="admission">
+        <!--</div>-->
+        <!--<div class="pharmacist_div" v-for="data in course_data4" @click="jump2detail(4,0,data.course_id,data.is_free)">-->
+        <!--<div class="pharmacist_left">-->
+        <!--<img class="pharmacist_left_img" :src="data.course_thumb" alt="">-->
+        <!--</div>-->
+        <!--<div class="pharmacist_right">-->
+        <!--<h4 class="pharmacist_right_h4">-->
+        <!--{{data.course_name}}-->
+        <!--</h4>-->
+        <!--<p class="pharmacist_right_p">-->
+        <!--{{data.teacher_name}}-&#45;&#45;{{data.teacher_unit}}-->
+        <!--</p>-->
+        <!--<p class="pharmacist_right_p">-->
+        <!--<span>时长：</span>-->
+        <!--{{formatHour(data.time_num)}}小时/{{data.subject_num}}节课-->
+        <!--</p>-->
+        <!--<div class="listofcourses_bottom">-->
+        <!--<p v-if="data.d_course_price != null">¥{{data.course_price}}</p>-->
+        <!--<p v-if="data.d_course_price != null" class="original_price">¥{{data.d_course_price}}</p>-->
+        <!--<p v-if="data.d_course_price == null">¥{{data.course_price}}</p>-->
+        <!--<img src="../../img/course/gouwuche_13.png" alt="" class="listofcourses_bottom_img"-->
+        <!--v-on:click.stop="buy_other(data.course_id, data.isbuy)"></div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="admission_bottom" @click="getCourseData(4)">-->
+        <!--<p>-->
+        <!--<img class="admission_bottom_img" src="../../img/homepage/huanyipi_37.png" alt="">换一批-->
+        <!--</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--免费专区-->
+        <!--  <div class="admission">
          <div class="admission_div">
              <div class="admission_div_top">
                  <p class="admission_div_top_p">
@@ -474,303 +475,269 @@
              </div>
          </div>
      </div> -->
-    <!--广告-->
-    <!--<div class="floating_live" v-if="ad_show&&ad_info.name!=undefined" @click="ad_click">-->
+        <!--广告-->
+        <!--<div class="floating_live" v-if="ad_show&&ad_info.name!=undefined" @click="ad_click">-->
         <!--<img class="floating_live_img" src="../../img/homepage/guanbi_44.png" alt="" @click.stop="close_ad">-->
         <!--<div class="floating_live_div">-->
-            <!--<img class="floating_live_div_igm" :src="ad_info.img">-->
-            <!--<div class="floating_live_div_right">-->
-                <!--<p class="floating_live_div_right_p">-->
-                    <!--{{ad_info.name}}-->
-                <!--</p>-->
-                <!--<p class="floating_live_div_right_p2">-->
-                    <!--{{ad_info.synopsis}}-->
-                <!--</p>-->
-            <!--</div>-->
+        <!--<img class="floating_live_div_igm" :src="ad_info.img">-->
+        <!--<div class="floating_live_div_right">-->
+        <!--<p class="floating_live_div_right_p">-->
+        <!--{{ad_info.name}}-->
+        <!--</p>-->
+        <!--<p class="floating_live_div_right_p2">-->
+        <!--{{ad_info.synopsis}}-->
+        <!--</p>-->
         <!--</div>-->
-    <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
 
 
 
-    <!--点击购买-非套包-->
-    <div class="concealmentlayer" v-if="showbuy1">
-        <div class="concealmentlayer_div">
-            <h4 class="concealmentlayer_h4">
-                <p class="concealmentlayer_title_h4">
-                    {{popupwindow_data[current_buy].course_type_name}}
-                    <span class="concealmentlayer_title_span">有效期:{{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>
-                </p>
-                <img src="../img/user_info/placeholder_03.png" alt="" @click="close">
-            </h4>
-            <div class="concealmentlayer_title">
-                <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
-                    请选择方向
-                </p>
-                <!--<p class="concealmentlayer_title_p">-->
+        <!--点击购买-非套包-->
+        <div class="concealmentlayer" v-if="showbuy1">
+            <div class="concealmentlayer_div">
+                <h4 class="concealmentlayer_h4">
+                    <p class="concealmentlayer_title_h4">
+                        {{popupwindow_data[current_buy].course_type_name}}
+                        <span class="concealmentlayer_title_span">有效期:{{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>
+                    </p>
+                    <img src="../img/user_info/placeholder_03.png" alt="" @click="close">
+                </h4>
+                <div class="concealmentlayer_title">
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem;padding:0;padding-top: .3rem">
+                        请选择方向
+                    </p>
+                    <!--<p class="concealmentlayer_title_p">-->
                     <!--<span class="concealmentlayer_title_span">有效期： {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].down_time}} </span>-->
                     <!--<span> 上线时间：{{popupwindow_data[current_buy].class_time}} </span>-->
-                <!--</p>-->
-            </div>
-            <!--<div class="listofcourses_two">-->
+                    <!--</p>-->
+                </div>
                 <!--<div class="listofcourses_two">-->
-                    <!--<div class="listofcourses_two_div">-->
-                        <!--<p class="listofcourses_two_p">-->
-                            <!--本班次课程-->
-                        <!--</p>-->
-                    <!--</div>-->
+                <!--<div class="listofcourses_two">-->
+                <!--<div class="listofcourses_two_div">-->
+                <!--<p class="listofcourses_two_p">-->
+                <!--本班次课程-->
+                <!--</p>-->
                 <!--</div>-->
-            <!--</div>-->
-            <ul class="curriculum_ul">
-                <!--套包里面是多选，普通的里面是单选-->
-                <li v-for="(data,class_index) in popupwindow_data" :class="{lis:data.course_id==179}" @click="check_class(class_index)">
-                    <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:class_index==current_buy}"
-                    >
-                        {{data.direction_name}}
-                        <span :class="{concealmentlayer_ullidiv_span:class_index==current_buy}" v-if="data.spec[0].discount_price == null">（￥{{parseInt(data.spec[0].price)}}）</span>
-                        <span  :class="{concealmentlayer_ullidiv_span:class_index==current_buy}" v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
-                        <!--<span  :class="{concealmentlayer_ullidiv_span:class_index==current_buy}"  class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>-->
-                    </span>
-                    </div>
-                    <!--{{data.direction_name}}-->
-                    <!--<span v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>-->
-                    <!--<span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）-->
+                <!--</div>-->
+                <!--</div>-->
+                <ul class="curriculum_ul">
+                    <!--套包里面是多选，普通的里面是单选-->
+                    <li v-for="(data,class_index) in popupwindow_data" :class="{lis:data.course_id==179}" @click="check_class(class_index)">
+                        <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:class_index==current_buy}">
+                            {{data.direction_name}}
+                            <span :class="{concealmentlayer_ullidiv_span:class_index==current_buy}" v-if="data.spec[0].discount_price == null">（￥{{parseInt(data.spec[0].price)}}）</span>
+                            <span :class="{concealmentlayer_ullidiv_span:class_index==current_buy}" v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
+                                <!--<span  :class="{concealmentlayer_ullidiv_span:class_index==current_buy}"  class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>-->
+                            </span>
+                        </div>
+                        <!--{{data.direction_name}}-->
+                        <!--<span v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>-->
+                        <!--<span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）-->
                         <!--<span  class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>-->
-                    <!--</span>-->
-                </li>
-            </ul>
-            <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null"
-                 @click="buy_two_years(!buy_two_years_flag,false)">
-                <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}"
-                >
-                    <img src="../img/course/concealmentlayer_xuan_03.png" alt="">
-                </div>
-                两年期课程保障
-            </div>
-
-            <div class="concealmentlayer_bottom">
-                <div class="concealmentlayer_bottom_div1" v-if="Goto_buy1 == 0">
-                    <!-- 加入购物车 和 立即购买 -->
-                    <div class="concealmentlayer_bottom_left"
-                         @click="Goto_buyi(1)">
-                        加入购物车
-                    </div>
-                    <div class="concealmentlayer_bottom_right"
-                         @click="Goto_buyi(2)">
-                        立即购买
-                    </div>
-                </div>
-                <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy1 == 1 || Goto_buy1 == 2}" v-if="Goto_buy1 == 1 || Goto_buy1 == 2">
-                    <!--购物车 确认 -->
-                    <p class="title_div_left_p2"
-                       v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0">
-                        金额 :
-                       <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
-                    </p>
-                    <p class="title_div_left_p2"
-                       v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0">
-                        金额 :
-                       <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
-                    </p>
-                    <div class="yishi_GM"  v-if="Goto_buy1 == 1"
-                     @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
-                        确认
-                    </div>
-                    <!-- 立即购买 确认 -->
-                    <div class="yishi_GM" v-if="Goto_buy1 == 2"
-                         @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
-                        确 认
-                    </div>
-                </div>
-                <!-- 空 div-->
-            </div>
-            <div style="width: 100%;height: 1.43rem;"></div>
-        </div>
-    </div>
-
-
-    <!--点击购买-套包-->
-    <div class="concealmentlayer" v-if="showbuy2">
-        <div class="concealmentlayer_div">
-            <h4 class="concealmentlayer_h4">
-                <p class="concealmentlayer_title_h4">
-                    {{popupwindow_data_collar[current_type].course_type_name}}
-                    <span class="concealmentlayer_title_span">有效期:{{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
-                </p>
-                <img src="../img/user_info/placeholder_03.png" alt="" @click="close">
-            </h4>
-            <div class="concealmentlayer_title">
-                <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
-                    请选择方向
-                </p>
-
-            </div>
-
-            <div class="classification">
-                <p  class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
-                    请选择分类
-                </p>
-                <ul class="classification_ul">
-                    <li :class="{classification_ulli:type_index==current_type}"
-                        v-for="(data,type_index) in popupwindow_data_collar" @click="check_type(type_index)">
-                        {{data.direction_name}}
+                        <!--</span>-->
                     </li>
                 </ul>
-            </div>
-
-            <!--<div class="listofcourses_two">-->
-                <!--<div class="listofcourses_two">-->
-                    <!--<div class="listofcourses_two_div">-->
-                        <!--<p class="listofcourses_two_p">-->
-                            <!--本班次课程-->
-                        <!--</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="concealmentlayer_title">
-                <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
-                    请选择方向
-                </p>
-
-            </div>
-
-            <ul class="curriculum_ul">
-                <!--套包里面是多选，普通的里面是单选-->
-                <li v-for="(data,class_index) in popupwindow_data_collar[current_type].course_list"
-                    @click="check_class_collar(class_index)">
-                    <div class="concealmentlayer_xuan" :class="{concealmentlayer_ullidiv:data.checks=='True'}">
+                <div class="curriculum_twoyears" v-if="popupwindow_data[current_buy].spec[1]!=null" @click="buy_two_years(!buy_two_years_flag,false)">
+                    <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}">
                         <img src="../img/course/concealmentlayer_xuan_03.png" alt="">
                     </div>
-                    {{data.direction_name}}
-                    <span class="price_span" v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
-                    <span  v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
-                        <span  class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span>
-                    </span>
-                </li>
-            </ul>
+                    两年期课程保障
+                </div>
 
-            <div class="curriculum_twoyears" v-if="popupwindow_data_collar[current_type].spec[1]!=null"
-                 @click="buy_two_years(!buy_two_years_flag,true)">
-                <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}">
-                    <img src="../img/course/concealmentlayer_xuan_03.png" alt="">
+                <div class="concealmentlayer_bottom">
+                    <div class="concealmentlayer_bottom_div1" v-if="Goto_buy1 == 0">
+                        <!-- 加入购物车 和 立即购买 -->
+                        <div class="concealmentlayer_bottom_left" @click="Goto_buyi(1)">
+                            加入购物车
+                        </div>
+                        <div class="concealmentlayer_bottom_right" @click="Goto_buyi(2)">
+                            立即购买
+                        </div>
+                    </div>
+                    <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy1 == 1 || Goto_buy1 == 2}" v-if="Goto_buy1 == 1 || Goto_buy1 == 2">
+                        <!--购物车 确认 -->
+                        <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy1 != 0">
+                            金额 :
+                            <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
+                        </p>
+                        <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy1 != 0">
+                            金额 :
+                            <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
+                        </p>
+                        <div class="yishi_GM" v-if="Goto_buy1 == 1" @click="buy(popupwindow_data[current_buy].course_id,false,popupwindow_data[current_buy].isbuy,true,popupwindow_data[current_buy].spec)">
+                            确认
+                        </div>
+                        <!-- 立即购买 确认 -->
+                        <div class="yishi_GM" v-if="Goto_buy1 == 2" @click="buy(popupwindow_data[current_buy].course_id,true,popupwindow_data[current_buy].isbuy,false,popupwindow_data[current_buy].spec)">
+                            确 认
+                        </div>
+                    </div>
+                    <!-- 空 div-->
                 </div>
-                两年期课程保障
-            </div>
-            <div class="concealmentlayer_bottom">
-                <div class="concealmentlayer_bottom_div1" v-if="Goto_buy2 == 0">
-                    <!-- 加入购物车 和 立即购买 -->
-                    <div class="concealmentlayer_bottom_left"
-                         @click="Goto_buyE(1)">
-                        加入购物车
-                    </div>
-                    <div class="concealmentlayer_bottom_right"
-                         @click="Goto_buyE(2)">
-                        立即购买
-                    </div>
-                </div>
-                <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy2 == 1 || Goto_buy2 == 2}" v-if="Goto_buy2 == 1 || Goto_buy2 == 2">
-                    <!--购物车 确认 -->
-                    <p class="title_div_left_p2"
-                       v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy2 != 0">
-                        金额 :
-                        <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
-                    </p>
-                    <p class="title_div_left_p2"
-                       v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy2 != 0">
-                        金额 :
-                        <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
-                    </p>
-                    <div class="yishi_GM"  v-if="Goto_buy2 == 1"
-                         @click="buy('',false,'',true,popupwindow_data_collar[current_type].spec)">
-                        确认
-                    </div>
-                    <!-- 立即购买 确认 -->
-                    <div class="yishi_GM" v-if="Goto_buy2 == 2"
-                         @click="buy('',true,'',false,popupwindow_data_collar[current_type].spec)">
-                        确 认
-                    </div>
-                </div>
-                <!-- 空 div-->
                 <div style="width: 100%;height: 1.43rem;"></div>
             </div>
         </div>
-    </div>
 
-    <!-- 精选图书 -->
-    <div class="threepartypurchase" v-show="show_book">
-        <div class="threepartypurchase_div">
-            <div class="threepartypurchase_top">
-                <div class="threepartypurchase_top_seciton">
-                    <p class="threepartypurchase_top_seciton_p">
-                        精选图书
+
+        <!--点击购买-套包-->
+        <div class="concealmentlayer" v-if="showbuy2">
+            <div class="concealmentlayer_div">
+                <h4 class="concealmentlayer_h4">
+                    <p class="concealmentlayer_title_h4">
+                        {{popupwindow_data_collar[current_type].course_type_name}}
+                        <span class="concealmentlayer_title_span">有效期:{{popupwindow_data_collar[current_type].spec[buy_two_years_flag?1:0].down_time}} </span>
                     </p>
-                    <img src="../img/homepage/threepartypurchase_guanbi_03.png" alt="" @click="close_book">
+                    <img src="../img/user_info/placeholder_03.png" alt="" @click="close">
+                </h4>
+                <div class="concealmentlayer_title">
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem;padding:0;padding-top: .3rem">
+                        请选择分类
+                    </p>
                 </div>
-            </div>
-            <div class="threepartypurchase_bottom">
-                <ul class="threepartypurchase_bottom_ul">
-                    <li class="threepartypurchase_bottom_ulli" v-for="data in books">
-                        <div class="threepartypurchase_bottom_left">
-                            <img class="threepartypurchase_bottom_left_img" :src="data.img"
-                                 alt="">
-                            <div class="threepartypurchase_bottom_leftdiv">
-                                <p class="threepartypurchase_bottom_leftdiv_p">{{data.title}}</p>
-                                <p class="threepartypurchase_bottom_leftdiv_p2">
-                                    {{data.resourse}}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="threepartypurchase_bottom_right" @click="to_page(data.url)">
-                            <img class="threepartypurchase_bottom_right_img" src="../img/homepage/Shopping2_10.png"
-                                 alt="">
-                            去购书
-                        </div>
+                <ul class="classification_ul">
+                    <li :class="{classification_ulli:type_index==current_type}" v-for="(data,type_index) in popupwindow_data_collar" @click="check_type(type_index)">
+                        {{data.direction_name}}
                     </li>
                 </ul>
-            </div>
-        </div>
-    </div>
+            
 
-    <!-- 袋鼠商城 -->
-    <div class="threepartypurchase" v-show="show_shop">
-        <div class="threepartypurchase_div">
-            <div class="threepartypurchase_top">
-                <div class="threepartypurchase_top_seciton">
-                    <p class="threepartypurchase_top_seciton_p">
-                        袋鼠商城
+                <!--<div class="listofcourses_two">-->
+                <!--<div class="listofcourses_two">-->
+                <!--<div class="listofcourses_two_div">-->
+                <!--<p class="listofcourses_two_p">-->
+                <!--本班次课程-->
+                <!--</p>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="concealmentlayer_title">
+                    <p class="admission_div_top_p" style="border-left-color: rgb(2, 153, 236);font-size: .4rem;margin-left: .2rem">
+                        请选择方向
                     </p>
-                    <img src="../img/homepage/threepartypurchase_guanbi_03.png" alt="" @click="close_shop">
+
                 </div>
-            </div>
-            <div class="threepartypurchase_bottom">
-                <ul class="threepartypurchase_bottom_ul">
-                    <li class="threepartypurchase_bottom_ulli" v-for="data in shops">
-                        <div class="threepartypurchase_bottom_left">
-                            <img class="threepartypurchase_bottom_left_img" :src="data.img"
-                                 alt="">
-                            <div class="threepartypurchase_bottom_leftdiv">
-                                <p class="threepartypurchase_bottom_leftdiv_p">{{data.title}}</p>
-                                <p class="threepartypurchase_bottom_leftdiv_p2">
-                                    {{data.resourse}}
-                                </p>
-                            </div>
+
+                <ul class="curriculum_ul">
+                    <!--套包里面是多选，普通的里面是单选-->
+                    <li v-for="(data,class_index) in popupwindow_data_collar[current_type].course_list" @click="check_class_collar(class_index)">
+                        <div class="concealmentlayer_xuan3" :class="{concealmentlayer_ullidiv:data.checks=='True'}">
+                                {{data.direction_name}}
+                                <span class="price_span" v-if="data.spec[0].discount_price == null">（￥{{data.spec[0].price}}）</span>
+                                <span v-if="data.spec[0].discount_price != null">（￥{{data.spec[0].discount_price}}）
+                                    <!-- <span class="discount" v-if="data.spec[0].discount_val != null">限时优惠{{data.spec[0].discount_val}}折</span> -->
+                                </span>
                         </div>
-                        <div class="threepartypurchase_bottom_right" @click="to_page(data.url, data.flag)">
-                            <img class="threepartypurchase_bottom_right_img" src="../img/homepage/Shopping2_10.png"
-                                 alt="">
-                            去购课
-                        </div>
+                       
                     </li>
                 </ul>
+
+                <div class="curriculum_twoyears" v-if="popupwindow_data_collar[current_type].spec[1]!=null" @click="buy_two_years(!buy_two_years_flag,true)">
+                    <div class="concealmentlayer_xuan2" :class="{concealmentlayer_ullidiv:buy_two_years_flag}">
+                        <img src="../img/course/concealmentlayer_xuan_03.png" alt="">
+                    </div>
+                    两年期课程保障
+                </div>
+                <div class="concealmentlayer_bottom">
+                    <div class="concealmentlayer_bottom_div1" v-if="Goto_buy2 == 0">
+                        <!-- 加入购物车 和 立即购买 -->
+                        <div class="concealmentlayer_bottom_left" @click="Goto_buyE(1)">
+                            加入购物车
+                        </div>
+                        <div class="concealmentlayer_bottom_right" @click="Goto_buyE(2)">
+                            立即购买
+                        </div>
+                    </div>
+                    <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy2 == 1 || Goto_buy2 == 2}" v-if="Goto_buy2 == 1 || Goto_buy2 == 2">
+                        <!--购物车 确认 -->
+                        <p class="title_div_left_p2" v-if="Goto_buy2 != 0">
+                            金额 :
+                            <span> ¥ {{collar_price}}</span>
+                        </p>
+                        <div class="yishi_GM" v-if="Goto_buy2 == 1" @click="buy('',false,'',true,popupwindow_data_collar[current_type].spec)">
+                            确认
+                        </div>
+                        <!-- 立即购买 确认 -->
+                        <div class="yishi_GM" v-if="Goto_buy2 == 2" @click="buy('',true,'',false,popupwindow_data_collar[current_type].spec)">
+                            确 认
+                        </div>
+                    </div>
+                    <!-- 空 div-->
+                    <div style="width: 100%;height: 1.43rem;"></div>
+                </div>
             </div>
         </div>
+
+        <!-- 精选图书 -->
+        <div class="threepartypurchase" v-show="show_book">
+            <div class="threepartypurchase_div">
+                <div class="threepartypurchase_top">
+                    <div class="threepartypurchase_top_seciton">
+                        <p class="threepartypurchase_top_seciton_p">
+                            精选图书
+                        </p>
+                        <img src="../img/homepage/threepartypurchase_guanbi_03.png" alt="" @click="close_book">
+                    </div>
+                </div>
+                <div class="threepartypurchase_bottom">
+                    <ul class="threepartypurchase_bottom_ul">
+                        <li class="threepartypurchase_bottom_ulli" v-for="data in books">
+                            <div class="threepartypurchase_bottom_left">
+                                <img class="threepartypurchase_bottom_left_img" :src="data.img" alt="">
+                                <div class="threepartypurchase_bottom_leftdiv">
+                                    <p class="threepartypurchase_bottom_leftdiv_p">{{data.title}}</p>
+                                    <p class="threepartypurchase_bottom_leftdiv_p2">
+                                        {{data.resourse}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="threepartypurchase_bottom_right" @click="to_page(data.url)">
+                                <img class="threepartypurchase_bottom_right_img" src="../img/homepage/Shopping2_10.png" alt=""> 去购书
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 袋鼠商城 -->
+        <div class="threepartypurchase" v-show="show_shop">
+            <div class="threepartypurchase_div">
+                <div class="threepartypurchase_top">
+                    <div class="threepartypurchase_top_seciton">
+                        <p class="threepartypurchase_top_seciton_p">
+                            袋鼠商城
+                        </p>
+                        <img src="../img/homepage/threepartypurchase_guanbi_03.png" alt="" @click="close_shop">
+                    </div>
+                </div>
+                <div class="threepartypurchase_bottom">
+                    <ul class="threepartypurchase_bottom_ul">
+                        <li class="threepartypurchase_bottom_ulli" v-for="data in shops">
+                            <div class="threepartypurchase_bottom_left">
+                                <img class="threepartypurchase_bottom_left_img" :src="data.img" alt="">
+                                <div class="threepartypurchase_bottom_leftdiv">
+                                    <p class="threepartypurchase_bottom_leftdiv_p">{{data.title}}</p>
+                                    <p class="threepartypurchase_bottom_leftdiv_p2">
+                                        {{data.resourse}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="threepartypurchase_bottom_right" @click="to_page(data.url, data.flag)">
+                                <img class="threepartypurchase_bottom_right_img" src="../img/homepage/Shopping2_10.png" alt=""> 去购课
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- <toast ref="toast"></toast> -->
+        <!--底部导航-->
+        <main_bottom_navs init_tabs="0"></main_bottom_navs>
+
     </div>
-
-    <!-- <toast ref="toast"></toast> -->
-    <!--底部导航-->
-    <main_bottom_navs init_tabs="0"></main_bottom_navs>
-
-</div>
 </body>
 
 
@@ -922,6 +889,18 @@
             },
             Goto_buyE(a){
                 this.Goto_buy2 = a;
+
+                 var tempData = app.popupwindow_data_collar[app.current_type].course_list;
+                for (var i=0;i<tempData.length;i++){
+                    tempData[i].checks = 'True'
+                }
+                
+                if(this.popupwindow_data_collar[0].spec[0].discount_price == null){
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }else{
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }
+
             },
             FDredge(){
               this.IsDredge = false;
@@ -1522,4 +1501,5 @@
 
 <!--插入页面元素统一JS-->
 <!-- <script src="../../js/index_bottom.js"></script> -->
+
 </html>

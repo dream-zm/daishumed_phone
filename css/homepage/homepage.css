@@ -194,7 +194,7 @@ body {
 }
 
 .admission_div_top_p3 {
-    border-color: #ff714a;
+    border-color: #37af12;
 }
 
 .admission_div_right {
@@ -604,7 +604,7 @@ body {
 .concealmentlayer_h4 p {
     padding-left: .2rem;
     float: left;
-    font-size: .56rem;
+    font-size: .48rem;
     font-weight: bolder;
     width: 90%;
 }
@@ -635,7 +635,7 @@ body {
 }
 
 .concealmentlayer_title_span {
-    font-size: .38rem;
+    font-size: .32rem;
     font-weight: 500;
     color: #999999;
 }
@@ -906,7 +906,7 @@ body {
 .curriculum_ul li span {
     color: #ff7e00;
     margin-top: 5px;
-    margin-left: -0.1rem;
+    margin-left: -0.15rem;
 }
 .curriculum_ul li .discount {
     color: red;
