@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <!-- <meta name="x5-fullscreen" content="true"> -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>卡券激活成功</title>
+    <!--flexible布局-->
+    <script src="../../js/flexible.js"></script>
+    <!--公共引用-->
+    <script src="../../js/jquery-2.1.4.js"></script>
+    <script src="../../js/index_top.js"></script>
+    <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/index.css">
+    <!--购物车公共.css-->
+    <link rel="stylesheet" href="../../css/shopcar/shopcar_index.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    
+    <!--本页面引入-->
+    <link rel="stylesheet" href="../../css/shopcar/voucher_activation.css">
+    <link rel="stylesheet" href="../../css/shopcar/coupon.css">
+</head>
+<body>
+<div id="app_body"  v-cloak>
+   <nav class="homepage_nav">
+        <img class="logo" src="../../img/homepage/logo_03.png">
+            卡券激活
+        <div class="homepage_nav_right" @click="jump2shopCar">
+            <img src="../../img/course/ShoppingCart_03.png" alt="">
+            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+        </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
+    <div class="kaquan" style="height: 22.02rem;width: 100%;background: url('../../img/shopcar/jihuo_success_02_01_02.png') no-repeat;background-size: 100% 100%;">
+        <img class="img" src="../../img/shopcar/kaquan_02.png">
+        <img class="img img_bottom" src="../../img/shopcar/yhq.png" style="margin: .8rem 0 .7rem 0">
+        <div class="course">
+          <div class="course_con"> 
+            <img style="width: 7rem" src="../../img/shopcar/jihuo_success_02_03.png">
+            <p class="course_p" style="font-size: 2.56rem;color: #e2b573;top: 1rem;font-family: '微软雅黑';left: -.2rem;"><span style="display: block;transform:rotate(-20deg);">{{parseInt(yhq,10)}}</span></p>
+            <div class="course_div" style="bottom: .58rem;"> 
+
+                <div class="yhq_tip">
+                    <p style="font-size: .36rem;text-align:left;margin-bottom: .24rem; ">使用规则：</p> 
+                    <p>1.本券可以叠加使用，满100元-20元，每单累计最高可减100元；</p>
+                    <p>2.本券使用有效期截止到18.11.30；</p>
+                    <p>3.本券只限袋鼠医学课程类产品，不可兑换现金，最终解释权归属袋鼠医学。</p> 
+                </div>
+            </div>
+          </div>
+            
+
+        </div>
+        <div class="fail_tip" style="margin: .53rem .6rem .48rem .6rem"><a href="../index.html">去课程商城看看</a></div> 
+        <div class="contact" style="margin-top: .64rem;">
+            <img src="../../img/shopcar/kaquan_07.png">
+            <p>想要获取免费直播、知识点推送等服务</p>
+            <p>请关注袋鼠医学微信公众号（daishumed）</p>
+        </div>
+        <!-- <div class="kaquan_con">            
+            <p style="float: none;width: 100%;"><img src="../../img/shopcar/jihuo_shibai_05.png" style="margin-top: -.15rem;">组团学习请加QQ群：<span style="color: #ef5f2c">590385908</span></p>
+        </div> -->
+         <div class="kaquan_con">
+            <p><img src="../../img/shopcar/kaquan_15.png">电话: 400-9001-765</p>
+            <p><img src="../../img/shopcar/kaquan_11.png">QQ群: 590385908</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<!--layui框架.js-->
+<script src="../../plug/layui/layui.js"></script>
+<!--插入页面元素统一JS-->
+
+<!--vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script src="../../js/index_footer.js"></script>
+<!--图形验证码-->
+<!-- <script src="../../js/graphic_veriry.js"></script> -->
+<script src="../../js/regular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+ <script type="text/babel"> 
+    
+
+    var vm = new Vue({
+        el: '#app_body',
+        data: {
+            shopcar_num: 0,
+            yhq: ''
+        }
+    })
+    function GouNum(){
+        yaqooNetPost('Cart/index', '', function (data) {
+            if (data['code'] == 1000) {
+                for(var i in data['data']){
+                    if(data['data'][i].product_type != 2){
+                        vm.shopcar_num += 1
+                    }
+                }
+            }
+        })
+    }
+
+    if (check_user_state()) {
+        GouNum();
+        vm.yhq = localStorage.getItem("yhq_zd");
+    }
+    
+    $(".Coupon_ul_click").on("click","li",function(){
+        window.location.href="../shopcar/submit_order.html"
+    })
+
+</script>
+</html>

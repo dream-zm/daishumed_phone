@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="full-screen" content="yes">
+    <!-- <meta name="x5-fullscreen" content="true"> -->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>卡券激活失败</title>
+    <!--flexible布局-->
+    <script src="../../js/flexible.js"></script>
+    <!--公共引用-->
+    <script src="../../js/jquery-2.1.4.js"></script>
+    <script src="../../js/index_top.js"></script>
+    <link rel="stylesheet" href="../../plug/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../plug/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/index.css">
+    <!--购物车公共.css-->
+    <link rel="stylesheet" href="../../css/shopcar/shopcar_index.css">
+    <link rel="stylesheet" href="../../css/homepage/homepage.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    
+    <!--本页面引入-->
+    <link rel="stylesheet" href="../../css/shopcar/voucher_activation.css">
+    <link rel="stylesheet" href="../../css/shopcar/coupon.css">
+</head>
+<body>
+<div id="app_body"  v-cloak>
+   <nav class="homepage_nav">
+        <img class="logo" src="../../img/homepage/logo_03.png">
+            卡券激活
+        <div class="homepage_nav_right" @click="jump2shopCar">
+            <img src="../../img/course/ShoppingCart_03.png" alt="">
+            <span class="homepage_nav_right_div">{{shopcar_num}}</span>
+        </div>
+        <!-- <div class="xiala" @click="show_xiala"><img  src="../img/homepage/xiala.png"></div> -->
+    </nav>
+    <div class="kaquan" style="height: 21.7rem;width: 100%;background: url('../../img/shopcar/jihuo_shibaibg_02.png') no-repeat;background-size: 100% 100%;">
+        <img class="img" src="../../img/shopcar/kaquan_02.png">
+        <img class="img img_bottom" src="../../img/shopcar/jihuo_shibai_02.png" style="margin: .73rem 0 .61rem 0">
+        <p class="fail_p">请联系您的发卡单位，或拨打袋鼠医学客服电话</p>
+        <p class="fail_p fail_p_other">400-9001-765</p>
+        <p class="fail_p">咨询（工作日9点-16点）</p>
+        <div class="fail_tip" style="margin: .89rem .6rem .31rem .6rem"><a href="./active_coupon1.html">重新激活</a></div> 
+        <div class="fail_tip" style="background: #ff6233"><a href="../index.html">去商城看看</a></div> 
+        <div class="contact" style="margin-top: .64rem;">
+            <img src="../../img/shopcar/kaquan_07.png">
+            <p>想要获取免费直播、知识点推送等服务</p>
+            <p>请关注袋鼠医学微信公众号（daishumed）</p>
+        </div>
+        <!-- <div class="kaquan_con">            
+            <p style="float: none;width: 100%;"><img src="../../img/shopcar/jihuo_shibai_05.png" style="margin-top: -.15rem;">组团学习请加QQ群：<span style="color: #ef5f2c">590385908</span></p>
+        </div> -->
+        <div class="kaquan_con">
+            <p><img src="../../img/shopcar/kaquan_15.png">电话: 400-9001-765</p>
+            <p><img src="../../img/shopcar/kaquan_11.png">QQ群: 590385908</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<!--layui框架.js-->
+<script src="../../plug/layui/layui.js"></script>
+<!--插入页面元素统一JS-->
+
+<!--vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script src="../../js/index_footer.js"></script>
+<!--图形验证码-->
+<!-- <script src="../../js/graphic_veriry.js"></script> -->
+<script src="../../js/regular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel">  
+
+    var vm = new Vue({
+        el: '#app_body',
+        data: {
+            shopcar_num: 0
+        }
+    })
+    function GouNum(){
+        yaqooNetPost('Cart/index', '', function (data) {
+            if (data['code'] == 1000) {
+                for(var i in data['data']){
+                    if(data['data'][i].product_type != 2){
+                        vm.shopcar_num += 1
+                    }
+                }
+            }
+        })
+    }
+
+    if (check_user_state()) {
+        GouNum();
+    }
+    
+    $(".Coupon_ul_click").on("click","li",function(){
+        window.location.href="../shopcar/submit_order.html"
+    })
+
+</script>
+</html>
