@@ -651,13 +651,9 @@
                     </div>
                     <div class="concealmentlayer_bottom_div1" :class="{concealmentlayer_bottom_div: Goto_buy2 == 1 || Goto_buy2 == 2}" v-if="Goto_buy2 == 1 || Goto_buy2 == 2">
                         <!--购物车 确认 -->
-                        <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price == null && Goto_buy2 != 0">
+                        <p class="title_div_left_p2" v-if="Goto_buy2 != 0">
                             金额 :
-                            <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].price}}</span>
-                        </p>
-                        <p class="title_div_left_p2" v-if="popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price != null && Goto_buy2 != 0">
-                            金额 :
-                            <span> ¥ {{popupwindow_data[current_buy].spec[buy_two_years_flag?1:0].discount_price}}</span>
+                            <span> ¥ {{collar_price}}</span>
                         </p>
                         <div class="yishi_GM" v-if="Goto_buy2 == 1" @click="buy('',false,'',true,popupwindow_data_collar[current_type].spec)">
                             确认
@@ -893,6 +889,18 @@
             },
             Goto_buyE(a){
                 this.Goto_buy2 = a;
+
+                 var tempData = app.popupwindow_data_collar[app.current_type].course_list;
+                for (var i=0;i<tempData.length;i++){
+                    tempData[i].checks = 'True'
+                }
+                
+                if(this.popupwindow_data_collar[0].spec[0].discount_price == null){
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }else{
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }
+
             },
             FDredge(){
               this.IsDredge = false;

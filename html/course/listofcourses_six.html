@@ -481,6 +481,17 @@
             },
             Goto_buyE(a){//药师
                 this.Goto_buy2 = a;
+                
+                var tempData = app.popupwindow_data_collar[app.current_type].course_list;
+                for (var i=0;i<tempData.length;i++){
+                    tempData[i].checks = 'True'
+                }
+                
+                if(this.popupwindow_data_collar[0].spec[0].discount_price == null){
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }else{
+                    this.collar_price = parseInt(app.popupwindow_data_collar[0].spec[0].price)
+                }
             },
             back(){
                 union_back();

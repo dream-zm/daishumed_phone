@@ -11,7 +11,6 @@
     z-index: 113;
     transition: all 0.5s;
     bottom: -12rem;
-<<<<<<< HEAD
 }
 .concealmentlayer_title {
     background: #fff;
@@ -22,8 +21,6 @@
     float: left;
     border-left: 0.08rem solid #0299ec;
     padding-left: .2rem;
-=======
->>>>>>> 5c8c4d5eb2e355781b80799bd433ed9cc2083c82
 }
 .concealmentlayer_xuan{
     float: none !important;
